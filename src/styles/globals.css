@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /*noinspection ALL*/
+  @font-face {
+    font-family: 'ICielStabile';
+    src: url(/fonts/ICielStabile-Regular.woff2) format('woff2');
+  }
+}
