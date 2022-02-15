@@ -3,12 +3,12 @@ import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import { SetStateAction, useEffect, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import ChicksLogo from '@/components/ChicksLogo';
-import SampleNft from '../assets/sample-nft.json';
 import ConsoleHelper from '@/utils/consoleHelper';
 
 export default function Index() {
   const { publicKey: solanaAddress } = useWallet();
   const [mobile, setMobile] = useState();
+  const [nfts, setNfts] = useState([]);
 
   const handleExchangeButtonClick = () => {
     ConsoleHelper(`handleExchangeButtonClick`);
@@ -17,6 +17,20 @@ export default function Index() {
   useEffect(() => {
     setMobile(isMobile as unknown as SetStateAction<undefined>);
   }, [setMobile]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const dummy = `DWLZyHmRWigchzVNnFVkZyFK4iywCSRVqAkHAruX1GEB`;
+      const respData = await fetch(
+        // `${process.env.NEXT_PUBLIC_BACKEND_URL}api/wallet?id=${solanaAddress}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}api/wallet?id=${dummy}`,
+      );
+      const jsonData = await respData.json();
+      setNfts(jsonData.data);
+    }
+
+    if (solanaAddress) fetchData();
+  }, [solanaAddress]);
 
   return (
     <div>
@@ -64,68 +78,75 @@ export default function Index() {
                 </div>
               </div>
               <main>
-                <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-                  <div className="px-4 py-6 sm:px-0">
-                    <div className="grid grid-cols-5 gap-6">
-                      <div className="col-span-3">
-                        <p className="text-3xl text-gray-900 font-bold">
-                          {SampleNft.metadata.data.collection.name} -{` `}
-                          {SampleNft.metadata.data.name}
-                        </p>
-                        <h3 className="pt-6 font-bold">Description</h3>
-                        <div className="pb-6 pt-6">
-                          <p className="text-base text-gray-900">
-                            {SampleNft.metadata.data.description}
+                {nfts.map((nft) => (
+                  <div
+                    key={nft}
+                    className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8"
+                  >
+                    <div className="px-4 py-6 sm:px-0">
+                      <div className="grid grid-cols-5 gap-6">
+                        <div className="col-span-3">
+                          <p className="text-3xl text-gray-900 font-bold">
+                            {nft.data.metadata.data.collection.name} -{` `}
+                            {nft.data.metadata.data.name}
                           </p>
-                        </div>
-                        <h3 className="font-bold">Attributes</h3>
-                        <div className="mt-4">
-                          <ul
-                            role="list"
-                            className="pl-4 list-disc text-sm space-y-2"
-                          >
-                            {SampleNft.metadata.data.attributes.map(
-                              (attribute) => (
-                                <li
-                                  key={attribute.trait_type}
-                                  className="text-gray-400"
-                                >
-                                  <span className="text-gray-600">
-                                    {attribute.value}
-                                  </span>
-                                </li>
-                              ),
-                            )}
-                          </ul>
-                          <div className="mt-8">
-                            <h3 className="font-bold pb-3">
-                              Claim Eligibility
-                            </h3>
-                            <span className="font-medium">
-                              You have owned this NFT for 1233 days and it is
-                              eligible for an exchange.
-                            </span>
-                            <button
-                              type="submit"
-                              className="mt-6 bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex
-                          items-center justify-center text-base font-bold text-white hover:bg-indigo-300
-                          focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                              onClick={handleExchangeButtonClick}
+                          <h3 className="pt-6 font-bold">Description</h3>
+                          <div className="pb-6 pt-6">
+                            <p className="text-base text-gray-900">
+                              {nft.data.metadata.data.description}
+                            </p>
+                          </div>
+                          <h3 className="font-bold">Attributes</h3>
+                          <div className="mt-4">
+                            <ul
+                              role="list"
+                              className="pl-4 list-disc text-sm space-y-2"
                             >
-                              Exchange
-                            </button>
+                              {nft.data.metadata.data.attributes.map(
+                                (attribute) => (
+                                  <li
+                                    key={attribute.trait_type}
+                                    className="text-gray-400"
+                                  >
+                                    <span className="text-gray-600">
+                                      {attribute.value}
+                                    </span>
+                                  </li>
+                                ),
+                              )}
+                            </ul>
+                            <div className="mt-8">
+                              <h3 className="font-bold pb-3">
+                                Claim Eligibility
+                              </h3>
+                              <span className="font-medium">
+                                You have owned this NFT for {nft.days_in_wallet} days and it {nft.days_in_wallet >= 60 ? "is" : "isn't"}
+                                eligible for an exchange.
+                              </span>
+                              {nft.days_in_wallet >= 60 ? (
+                                <button
+                                  type="submit"
+                                  className="mt-6 bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex
+                              items-center justify-center text-base font-bold text-white hover:bg-indigo-300
+                              focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                  onClick={handleExchangeButtonClick}
+                                >
+                                  Exchange
+                                </button>
+                                ) : null}
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      <div className="col-span-2">
-                        <img
-                          src={SampleNft.metadata.data.image}
-                          alt={SampleNft.metadata.data.description}
-                        />
+                        <div className="col-span-2">
+                          <img
+                            src={nft.data.metadata.data.image}
+                            alt={nft.data.metadata.data.description}
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
+                ))}
               </main>
             </div>
           )}
