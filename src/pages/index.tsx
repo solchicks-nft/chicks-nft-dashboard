@@ -1,18 +1,26 @@
 import { useWallet } from '@solana/wallet-adapter-react';
-import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import { SetStateAction, useEffect, useState } from 'react';
 import { isMobile } from 'react-device-detect';
-import ChicksLogo from '@/components/ChicksLogo';
-import ConsoleHelper from '@/utils/consoleHelper';
+import SampleNfts from '../assets/data/sample-nfts.json';
+import { INft } from '@/utils/nftConsts';
+import { ClockIcon, SparklesIcon } from '@heroicons/react/solid';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
+import { EggUpgradeConfirmModal } from '@/components/EggUpgradeConfirmModal';
+import SwapIcon from '@/components/SwapIcon';
+import { EggHatchConfirmModal } from '@/components/EggHatchConfirmModal';
+import MobileViewAlert from '@/components/MobileViewAlert';
+import ConnectWalletAlert from '@/components/ConnectWalletAlert';
 
 export default function Index() {
   const { publicKey: solanaAddress } = useWallet();
   const [mobile, setMobile] = useState();
-  const [nfts, setNfts] = useState([]);
-
-  const handleExchangeButtonClick = () => {
-    ConsoleHelper(`handleExchangeButtonClick`);
-  };
+  const [nfts, setNfts] = useState<INft[]>();
+  const [isEggUpgradeConfirmDialogOpen, setEggUpgradeConfirmModal] =
+    useState(false);
+  const [isEggHatchingConfirmDialogOpen, setEggHatchingConfirmModal] =
+    useState(false);
+  const [selectedNft, setSelectedNft] = useState<INft>();
 
   useEffect(() => {
     setMobile(isMobile as unknown as SetStateAction<undefined>);
@@ -20,134 +28,161 @@ export default function Index() {
 
   useEffect(() => {
     async function fetchData() {
-      const dummy = `DWLZyHmRWigchzVNnFVkZyFK4iywCSRVqAkHAruX1GEB`;
-      const respData = await fetch(
-        // `${process.env.NEXT_PUBLIC_BACKEND_URL}api/wallet?id=${solanaAddress}`,
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}api/wallet?id=${dummy}`,
-      );
-      const jsonData = await respData.json();
-      setNfts(jsonData.data);
+      if (process.env.NODE_ENV != `development`) {
+        const respData = await fetch(
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/wallet?id=${solanaAddress}`,
+        );
+        const jsonData = await respData.json();
+        setNfts(jsonData.data);
+      } else {
+        setNfts(SampleNfts as unknown as INft[]);
+      }
     }
-
-    if (solanaAddress) fetchData();
+    if (solanaAddress) fetchData().then();
   }, [solanaAddress]);
+
+  function isEggUpgradeAvailable(nft: INft) {
+    const nftValues = nft.data.metadata.data.attributes.filter(
+      (o) => o.value == `egg` || o.value == `hatched`,
+    );
+    return nft.days_in_wallet >= 60 && nftValues.length === 0;
+  }
+
+  function isEggHatchingAvailable(nft: INft) {
+    const nftValues = nft.data.metadata.data.attributes.filter(
+      (o) => o.value == `egg`,
+    );
+    return nft.days_in_wallet >= 60 && nftValues.length > 0;
+  }
 
   return (
     <div>
       {mobile ? (
-        <div className="flex flex-col h-screen bg-[url('/background.jpg')] bg-cover">
-          <div className="flex flex-col my-auto mx-auto items-center p-6 text-center text-white font-bold">
-            Please open this website in your desktop browser, mobile is
-            currently unsupported.
-          </div>
-        </div>
+        <MobileViewAlert />
       ) : (
         <div>
-          {!solanaAddress && (
-            <div className="flex flex-col h-screen bg-[url('/background.jpg')] bg-cover">
-              <div className="flex flex-col my-auto mx-auto items-center">
-                <p className="font-icielstabile text-xl md:text-6xl antialiased text-white drop-shadow-xl mb-6">
-                  Please connect your wallet
-                </p>
-                <WalletMultiButton
-                  className="py-2 px-4 border border-transparent shadow-sm text-sm
-                        font-bold rounded-md text-[#D75212] bg-[#FFC41D] hover:bg-[#A13C2F] hover:text-white
-                        font-icielstabile text-2xl"
-                />
-              </div>
-            </div>
-          )}
+          {!solanaAddress && <ConnectWalletAlert />}
           {solanaAddress && (
-            <div>
-              <div className="bg-indigo-900">
-                <div className="max-w-7xl mx-auto py-3 px-3 sm:px-6 lg:px-8">
-                  <div className="flex items-center justify-between flex-wrap">
-                    <div className="w-0 flex-1 flex items-center">
-                      <span className="flex p-2 rounded-lg">
-                        <ChicksLogo />
-                      </span>
-                    </div>
-                    <div className="order-3 mt-2 flex-shrink-0 w-full sm:order-3 sm:mt-0 sm:w-auto">
-                      <WalletMultiButton
-                        className="py-2 px-4 border border-transparent shadow-sm text-sm
-                        font-bold rounded-md text-[#D75212] bg-[#FFC41D] hover:bg-[#A13C2F] hover:text-white
-                        font-icielstabile text-2xl"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div className="min-h-screen bg-cover bg-gray-100">
+              <Navbar />
               <main>
-                {nfts.map((nft) => (
-                  <div
-                    key={nft}
-                    className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8"
-                  >
-                    <div className="px-4 py-6 sm:px-0">
-                      <div className="grid grid-cols-5 gap-6">
-                        <div className="col-span-3">
-                          <p className="text-3xl text-gray-900 font-bold">
-                            {nft.data.metadata.data.collection.name} -{` `}
-                            {nft.data.metadata.data.name}
-                          </p>
-                          <h3 className="pt-6 font-bold">Description</h3>
-                          <div className="pb-6 pt-6">
-                            <p className="text-base text-gray-900">
-                              {nft.data.metadata.data.description}
-                            </p>
+                <div className="max-w-7xl mx-auto py-12 sm:px-6 lg:px-12 bg-white">
+                  <h1 className="text-4xl font-bold tracking-tight text-gray-900 font-proximanovabold">
+                    Exchange
+                  </h1>
+                  <div className="mb-4 mt-4 text-xl text-gray-700 dark:bg-gray-700 dark:text-gray-300 font-proximanova">
+                    <span className="font-medium">
+                      Please select an NFT to swap for an exclusive 3D NFT.
+                    </span>
+                  </div>
+                  {nfts && (
+                    <div className="mt-12 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
+                      {nfts.map((nft) => (
+                        <div
+                          key={nft.hash}
+                          className="bg-gray-50 p-6 rounded-lg"
+                        >
+                          <div className="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden lg:h-80 lg:aspect-none">
+                            <img
+                              src={nft.data.metadata.data.image}
+                              alt={nft.data.metadata.data.description}
+                              className="w-full h-full object-center object-cover lg:w-full lg:h-full"
+                            />
                           </div>
-                          <h3 className="font-bold">Attributes</h3>
-                          <div className="mt-4">
-                            <ul
-                              role="list"
-                              className="pl-4 list-disc text-sm space-y-2"
-                            >
-                              {nft.data.metadata.data.attributes.map(
-                                (attribute) => (
-                                  <li
-                                    key={attribute.trait_type}
-                                    className="text-gray-400"
-                                  >
-                                    <span className="text-gray-600">
-                                      {attribute.value}
-                                    </span>
-                                  </li>
-                                ),
-                              )}
-                            </ul>
-                            <div className="mt-8">
-                              <h3 className="font-bold pb-3">
-                                Claim Eligibility
-                              </h3>
-                              <span className="font-medium">
-                                You have owned this NFT for {nft.days_in_wallet} days and it {nft.days_in_wallet >= 60 ? "is" : "isn't"}
-                                eligible for an exchange.
-                              </span>
-                              {nft.days_in_wallet >= 60 ? (
-                                <button
-                                  type="submit"
-                                  className="mt-6 bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex
-                              items-center justify-center text-base font-bold text-white hover:bg-indigo-300
-                              focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                                  onClick={handleExchangeButtonClick}
-                                >
-                                  Exchange
-                                </button>
-                                ) : null}
+                          <div className="mt-4 flex justify-between">
+                            <div className="font-bold text-xl pb-3 pt-2 font-proximanovabold">
+                              {nft.data.metadata.data.symbol}
+                              {` #`}
+                              {nft.data.metadata.data.name}
+                            </div>
+                          </div>
+                          <div className="flex text-sm py-1">
+                            <ClockIcon className="h-5 w-5 text-blue-500 mr-2" />
+                            <span className="font-proximanova">
+                              {nft.days_in_wallet}
+                              {` `}
+                              {nft.days_in_wallet == 1 ? `day` : `days`} in
+                              wallet
+                            </span>
+                          </div>
+                          <div className="flex text-sm py-1">
+                            <SparklesIcon className="h-5 w-5 text-blue-500 mr-2 " />
+                            <span className="font-proximanova">
+                              {isEggUpgradeAvailable(nft)
+                                ? `Egg upgrade available`
+                                : `Egg upgrade unavailable`}
+                            </span>
+                          </div>
+                          <div className="flex text-sm py-1">
+                            <SparklesIcon className="h-5 w-5 text-blue-500 mr-2" />
+                            <span className="font-proximanova">
+                              {isEggHatchingAvailable(nft)
+                                ? `Egg hatching available`
+                                : `Egg hatching unavailable`}
+                            </span>
+                          </div>
+                          <div className="flex-auto mt-5">
+                            <div className="rounded-md shadow">
+                              <button
+                                className={
+                                  isEggHatchingAvailable(nft) ||
+                                  isEggUpgradeAvailable(nft)
+                                    ? `w-full flex items-center justify-center px-8 py-3 border border-transparent
+                                    text-base font-bold rounded-md text-white bg-indigo-600 hover:bg-indigo-700
+                                    md:py-4 md:text-lg md:px-10 font-proximanovabold`
+                                    : `w-full flex items-center justify-center px-8 py-3 border border-transparent
+                                    text-base font-bold rounded-md text-white bg-gray-300 md:py-4 md:text-lg md:px-10
+                                    font-proximanovabold`
+                                }
+                                disabled={
+                                  !isEggHatchingAvailable(nft) &&
+                                  !isEggUpgradeAvailable(nft)
+                                }
+                                onClick={() => {
+                                  setSelectedNft(nft);
+                                  if (isEggUpgradeAvailable(nft)) {
+                                    setEggUpgradeConfirmModal(
+                                      !isEggUpgradeConfirmDialogOpen,
+                                    );
+                                  }
+                                  if (isEggHatchingAvailable(nft)) {
+                                    setEggHatchingConfirmModal(
+                                      !isEggHatchingConfirmDialogOpen,
+                                    );
+                                  }
+                                }}
+                              >
+                                <div className="pr-3">
+                                  <SwapIcon />
+                                </div>
+                                {` `}
+                                Exchange
+                              </button>
                             </div>
                           </div>
                         </div>
-                        <div className="col-span-2">
-                          <img
-                            src={nft.data.metadata.data.image}
-                            alt={nft.data.metadata.data.description}
-                          />
-                        </div>
-                      </div>
+                      ))}
                     </div>
-                  </div>
-                ))}
+                  )}
+                  {!nfts ||
+                    (nfts.length === 0 && (
+                      <div className="font-proximanova">
+                        We could not find any SolChicks NFTs in your wallet.
+                      </div>
+                    ))}
+                </div>
+                <Footer />
               </main>
+              <EggUpgradeConfirmModal
+                isOpen={isEggUpgradeConfirmDialogOpen}
+                setIsOpen={setEggUpgradeConfirmModal}
+                selectedNft={selectedNft}
+              />
+              <EggHatchConfirmModal
+                isOpen={isEggHatchingConfirmDialogOpen}
+                setIsOpen={setEggHatchingConfirmModal}
+                selectedNft={selectedNft}
+              />
             </div>
           )}
         </div>

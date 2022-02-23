@@ -4,6 +4,8 @@ module.exports = {
     extend: {
       fontFamily: {
         icielstabile: 'ICielStabile, sans-serif',
+        proximanovabold: 'ProximaNovaBold, sans-serif',
+        proximanovaregular: 'ProximaNovaRegular, sans-serif',
       },
     },
   },

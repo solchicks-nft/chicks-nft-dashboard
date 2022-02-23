@@ -1,0 +1,439 @@
+[
+  {
+    "id": 248,
+    "created_at": "2022-02-14T02:42:03.314+00:00",
+    "hash": "DWvL439m5G1fYSpbPx7YXFJuZPEFAsrfXSnLfVJyW3fo",
+    "wallet_address": "FYFmPpquZRxLSiaYK6FDpFZseYxt7FmxqhfNPjjmHdiR",
+    "days_in_wallet": 1,
+    "data": {
+      "type": "token_account",
+      "account": "DWvL439m5G1fYSpbPx7YXFJuZPEFAsrfXSnLfVJyW3fo",
+      "lamports": 1461600,
+      "metadata": {
+        "key": 4,
+        "data": {
+          "uri": "https://ipfs.io/ipfs/bafybeieta2hxctimi4blecmp7rm3evzfh5dqujs3hydm4tzf3gpakmnzoy/solchicks-2832.json",
+          "name": "2832",
+          "image": "https://ipfs.io/ipfs/bafybeiarzll6cr333b4hhhbi42kcscwdajr5o47av5kzscmkrf57ek4skm/solchicks-2832.png",
+          "symbol": "SOLCHICKS",
+          "attributes": [
+            { "value": "Mountains", "trait_type": "background" },
+            { "value": "SolChick", "trait_type": "base" },
+            { "value": "Chicago Bulls Jersey", "trait_type": "clothing" },
+            { "value": "Mohawk Hair", "trait_type": "hats" },
+            { "value": "Cowboy boots", "trait_type": "shoes" },
+            { "value": "Common", "trait_type": "rarity" }
+          ],
+          "collection": { "name": "SolChicks", "family": "SolChicks" },
+          "hashString": "1:Mountains,2:SolChick,3:Chicago Bulls Jersey,4:Mohawk Hair,5:Cowboy boots,",
+          "properties": {
+            "creators": [
+              {
+                "share": 100,
+                "address": "H5ZQGeTv23nJRcFmEprRLuM9cTeJMajYvf2k1JhuLhE2"
+              }
+            ]
+          },
+          "description": "From the original SolChicks collection minted at solchicks.io. Collect, breed and train your own unique SolChicks in a revolutionary gaming ecosystem.",
+          "rarityScore": 20650,
+          "external_url": "https://www.solchicks.io/",
+          "animation_url": "",
+          "seller_fee_basis_points": 500
+        },
+        "mint": "DWvL439m5G1fYSpbPx7YXFJuZPEFAsrfXSnLfVJyW3fo",
+        "type": "metaplex",
+        "isMutable": 1,
+        "updateAuthority": "7BPrveGEsNmr5UU2bSzSmHh8wbhB1NWTw4dXqykqpm1e",
+        "primarySaleHappened": 1
+      },
+      "rentEpoch": 279,
+      "tokenInfo": {
+        "name": "solchicks 2832",
+        "type": "nft",
+        "supply": "1",
+        "symbol": "SOLCHICKS",
+        "decimals": 0,
+        "tokenAuthority": "8yqUAj33rK8pMnydpmUxM7SM1yFHmHfNbvAXZNN4DEfU"
+      },
+      "ownerProgram": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+      "onchainMetadata": {
+        "key": 4,
+        "data": {
+          "uri": "https://ipfs.io/ipfs/bafybeieta2hxctimi4blecmp7rm3evzfh5dqujs3hydm4tzf3gpakmnzoy/solchicks-2832.json",
+          "name": "solchicks 2832",
+          "symbol": "SOLCHICKS",
+          "creators": [
+            {
+              "share": 0,
+              "address": "9nicnEJ1pfssv3CWxQFMebFBrs5Cqun8WEmwwLqapLeX",
+              "verified": 1
+            },
+            {
+              "share": 100,
+              "address": "7BPrveGEsNmr5UU2bSzSmHh8wbhB1NWTw4dXqykqpm1e",
+              "verified": 0
+            }
+          ],
+          "sellerFeeBasisPoints": 500
+        },
+        "mint": "DWvL439m5G1fYSpbPx7YXFJuZPEFAsrfXSnLfVJyW3fo",
+        "type": "metaplex",
+        "isMutable": 1,
+        "updateAuthority": "7BPrveGEsNmr5UU2bSzSmHh8wbhB1NWTw4dXqykqpm1e",
+        "primarySaleHappened": 1
+      }
+    },
+    "updated_at": "2022-02-15T15:31:17.334+00:00"
+  },
+  {
+    "id": 247,
+    "created_at": "2022-02-14T02:42:00.288+00:00",
+    "hash": "Gqrpxx26H1MeJ5kquukfWaPejdWNMP1DUJJic7sVLFYd",
+    "wallet_address": "FYFmPpquZRxLSiaYK6FDpFZseYxt7FmxqhfNPjjmHdiR",
+    "days_in_wallet": 123,
+    "data": {
+      "type": "token_account",
+      "account": "Gqrpxx26H1MeJ5kquukfWaPejdWNMP1DUJJic7sVLFYd",
+      "lamports": 1461600,
+      "metadata": {
+        "key": 4,
+        "data": {
+          "uri": "https://ipfs.io/ipfs/bafybeigzri5v6lk3nvtvh6dwocpfktmmfn3l6weszhposem3jbfuf2tdsm/solchicks-4569.json",
+          "name": "4569",
+          "image": "https://ipfs.io/ipfs/bafybeih6imphl5dcb3ntq443undmopwspycivtslw4xikbpnkoht3y3yha/solchicks-4569.png",
+          "symbol": "SOLCHICKS",
+          "attributes": [
+            { "value": "Light blue", "trait_type": "background" },
+            { "value": "SolChick", "trait_type": "base" },
+            { "value": "High Nike Dunk Sneakers", "trait_type": "shoes" },
+            { "value": "Silver Cross Necklace", "trait_type": "accessory" },
+            { "value": "Rare", "trait_type": "rarity" }
+          ],
+          "collection": { "name": "SolChicks", "family": "SolChicks" },
+          "hashString": "1:Light blue,2:SolChick,5:High Nike Dunk Sneakers,7:Silver Cross Necklace,",
+          "properties": {
+            "creators": [
+              {
+                "share": 100,
+                "address": "H5ZQGeTv23nJRcFmEprRLuM9cTeJMajYvf2k1JhuLhE2"
+              }
+            ]
+          },
+          "description": "From the original SolChicks collection minted at solchicks.io. Collect, breed and train your own unique SolChicks in a revolutionary gaming ecosystem.",
+          "rarityScore": 12750,
+          "external_url": "https://www.solchicks.io/",
+          "animation_url": "",
+          "seller_fee_basis_points": 500
+        },
+        "mint": "Gqrpxx26H1MeJ5kquukfWaPejdWNMP1DUJJic7sVLFYd",
+        "type": "metaplex",
+        "isMutable": 1,
+        "updateAuthority": "7BPrveGEsNmr5UU2bSzSmHh8wbhB1NWTw4dXqykqpm1e",
+        "primarySaleHappened": 1
+      },
+      "rentEpoch": 278,
+      "tokenInfo": {
+        "name": "solchicks 4569",
+        "type": "nft",
+        "supply": "1",
+        "symbol": "SOLCHICKS",
+        "decimals": 0,
+        "tokenAuthority": "6Fi425RLRd6LUgAoMbHSzZYpHx5CgN9RVDP8wxXLY229"
+      },
+      "ownerProgram": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+      "onchainMetadata": {
+        "key": 4,
+        "data": {
+          "uri": "https://ipfs.io/ipfs/bafybeigzri5v6lk3nvtvh6dwocpfktmmfn3l6weszhposem3jbfuf2tdsm/solchicks-4569.json",
+          "name": "solchicks 4569",
+          "symbol": "SOLCHICKS",
+          "creators": [
+            {
+              "share": 0,
+              "address": "9nicnEJ1pfssv3CWxQFMebFBrs5Cqun8WEmwwLqapLeX",
+              "verified": 1
+            },
+            {
+              "share": 100,
+              "address": "7BPrveGEsNmr5UU2bSzSmHh8wbhB1NWTw4dXqykqpm1e",
+              "verified": 0
+            }
+          ],
+          "sellerFeeBasisPoints": 500
+        },
+        "mint": "Gqrpxx26H1MeJ5kquukfWaPejdWNMP1DUJJic7sVLFYd",
+        "type": "metaplex",
+        "isMutable": 1,
+        "updateAuthority": "7BPrveGEsNmr5UU2bSzSmHh8wbhB1NWTw4dXqykqpm1e",
+        "primarySaleHappened": 1
+      }
+    },
+    "updated_at": "2022-02-14T03:17:21.617+00:00"
+  },
+  {
+    "id": 249,
+    "created_at": "2022-02-14T02:42:05.997543+00:00",
+    "hash": "FE4cCjRUPJ8vb5S7fRcck2TodHwUd1pvwUzrPJrTJc7m",
+    "wallet_address": "9qzbrvqbwJMy7Ep5ZXYQGuPULyeYgVPNW4Jmn59jiiN2",
+    "days_in_wallet": 122,
+    "data": {
+      "type": "token_account",
+      "account": "FE4cCjRUPJ8vb5S7fRcck2TodHwUd1pvwUzrPJrTJc7m",
+      "lamports": 1461600,
+      "metadata": {
+        "key": 4,
+        "data": {
+          "uri": "https://ipfs.io/ipfs/bafybeiatusmuronkgcyuhaojl2afais2lng6kuukbkouyo4pn2afr2sd7e/solchicks-4920.json",
+          "name": "4920",
+          "image": "https://i.imgur.com/ijpam6s.jpeg",
+          "symbol": "SOLCHICKS",
+          "attributes": [
+            { "value": "Blue", "trait_type": "background" },
+            { "value": "SolChick", "trait_type": "base" },
+            { "value": "Chicago Bulls Jersey", "trait_type": "clothing" },
+            { "value": "Reggae Haur", "trait_type": "hats" },
+            { "value": "High Nike Dunk Sneakers", "trait_type": "shoes" },
+            { "value": "Bruised Eyes", "trait_type": "eyeware" },
+            { "value": "Uncommon", "trait_type": "rarity" },
+            { "value": "egg", "trait_type": "stage" },
+            { "value": "0", "trait_type": "breedingCount" }
+          ],
+          "collection": { "name": "SolChicks", "family": "SolChicks" },
+          "hashString": "1:Blue,2:SolChick,3:Chicago Bulls Jersey,4:Reggae Haur,5:High Nike Dunk Sneakers,6:Bruised Eyes,7:none",
+          "properties": {
+            "creators": [
+              {
+                "share": 100,
+                "address": "H5ZQGeTv23nJRcFmEprRLuM9cTeJMajYvf2k1JhuLhE2"
+              }
+            ]
+          },
+          "description": "From the original SolChicks collection minted at solchicks.io. Collect, breed and train your own unique SolChicks in a revolutionary gaming ecosystem.",
+          "rarityScore": 18150,
+          "external_url": "https://www.solchicks.io/",
+          "animation_url": "",
+          "seller_fee_basis_points": 500
+        },
+        "mint": "FE4cCjRUPJ8vb5S7fRcck2TodHwUd1pvwUzrPJrTJc7m",
+        "type": "metaplex",
+        "isMutable": 1,
+        "updateAuthority": "7BPrveGEsNmr5UU2bSzSmHh8wbhB1NWTw4dXqykqpm1e",
+        "primarySaleHappened": 1
+      },
+      "rentEpoch": 278,
+      "tokenInfo": {
+        "name": "solchicks 4920",
+        "type": "nft",
+        "supply": "1",
+        "symbol": "SOLCHICKS",
+        "decimals": 0,
+        "tokenAuthority": "EQhEzr9qf3mqVef3PMayZ1XJ82QGXtsLTUD3M74MVAdR"
+      },
+      "ownerProgram": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+      "onchainMetadata": {
+        "key": 4,
+        "data": {
+          "uri": "https://ipfs.io/ipfs/bafybeiatusmuronkgcyuhaojl2afais2lng6kuukbkouyo4pn2afr2sd7e/solchicks-4920.json",
+          "name": "solchicks 4920",
+          "symbol": "SOLCHICKS",
+          "creators": [
+            {
+              "share": 0,
+              "address": "9nicnEJ1pfssv3CWxQFMebFBrs5Cqun8WEmwwLqapLeX",
+              "verified": 1
+            },
+            {
+              "share": 100,
+              "address": "7BPrveGEsNmr5UU2bSzSmHh8wbhB1NWTw4dXqykqpm1e",
+              "verified": 0
+            }
+          ],
+          "sellerFeeBasisPoints": 500
+        },
+        "mint": "FE4cCjRUPJ8vb5S7fRcck2TodHwUd1pvwUzrPJrTJc7m",
+        "type": "metaplex",
+        "isMutable": 1,
+        "updateAuthority": "7BPrveGEsNmr5UU2bSzSmHh8wbhB1NWTw4dXqykqpm1e",
+        "primarySaleHappened": 1
+      }
+    },
+    "updated_at": "2022-02-14T03:17:25.783+00:00"
+  },
+  {
+    "id": 257,
+    "created_at": "2022-02-14T02:44:54.900243+00:00",
+    "hash": "2K2aZkZBsqfhimSh5Lrmzx9eEbsBUEauKZNPfx9j1uTv",
+    "wallet_address": "HXCkDsBunQ46iuNewvmYogy5PmcrQJmLrdmXKTMp1Q5S",
+    "days_in_wallet": 150,
+    "data": {
+      "type": "token_account",
+      "account": "2K2aZkZBsqfhimSh5Lrmzx9eEbsBUEauKZNPfx9j1uTv",
+      "lamports": 1461600,
+      "metadata": {
+        "key": 4,
+        "data": {
+          "uri": "https://ipfs.io/ipfs/bafybeigz55fgt42poz3ra4tbzvalgtfwyl3a5o6cmyc2reocsw7lrpb4re/solchicks-2436.json",
+          "name": "2436",
+          "image": "https://i.imgur.com/JBocyDw.jpg",
+          "symbol": "SOLCHICKS",
+          "attributes": [
+            { "value": "City", "trait_type": "background" },
+            { "value": "SolChick", "trait_type": "base" },
+            { "value": "Pirate_s Suit", "trait_type": "clothing" },
+            { "value": "Santa_s Hat", "trait_type": "hats" },
+            { "value": "Gold Cross Earring", "trait_type": "accessory" },
+            { "value": "Uncommon", "trait_type": "rarity" },
+            { "value": "hatched", "trait_type": "stage" },
+            { "value": "0", "trait_type": "breedingCount" }
+          ],
+          "collection": { "name": "SolChicks", "family": "SolChicks" },
+          "hashString": "1:City,2:SolChick,3:Pirate_s Suit,4:Santa_s Hat,5:none,6:none,7:Gold Cross Earring,8:hatched",
+          "properties": {
+            "creators": [
+              {
+                "share": 100,
+                "address": "H5ZQGeTv23nJRcFmEprRLuM9cTeJMajYvf2k1JhuLhE2"
+              }
+            ]
+          },
+          "description": "From the original SolChicks collection minted at solchicks.io. Collect, breed and train your own unique SolChicks in a revolutionary gaming ecosystem.",
+          "rarityScore": 19250,
+          "external_url": "https://www.solchicks.io/",
+          "animation_url": "",
+          "seller_fee_basis_points": 500
+        },
+        "mint": "2K2aZkZBsqfhimSh5Lrmzx9eEbsBUEauKZNPfx9j1uTv",
+        "type": "metaplex",
+        "isMutable": 1,
+        "updateAuthority": "7BPrveGEsNmr5UU2bSzSmHh8wbhB1NWTw4dXqykqpm1e",
+        "primarySaleHappened": 1
+      },
+      "rentEpoch": 279,
+      "tokenInfo": {
+        "name": "solchicks 2436",
+        "type": "nft",
+        "supply": "1",
+        "symbol": "SOLCHICKS",
+        "decimals": 0,
+        "tokenAuthority": "5qHYhPKd3hw1ZvriJXfJD7QYRmuUSJsjVoZm8pFqmvoT"
+      },
+      "ownerProgram": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+      "onchainMetadata": {
+        "key": 4,
+        "data": {
+          "uri": "https://ipfs.io/ipfs/bafybeigz55fgt42poz3ra4tbzvalgtfwyl3a5o6cmyc2reocsw7lrpb4re/solchicks-2436.json",
+          "name": "solchicks 2436",
+          "symbol": "SOLCHICKS",
+          "creators": [
+            {
+              "share": 0,
+              "address": "9nicnEJ1pfssv3CWxQFMebFBrs5Cqun8WEmwwLqapLeX",
+              "verified": 1
+            },
+            {
+              "share": 100,
+              "address": "7BPrveGEsNmr5UU2bSzSmHh8wbhB1NWTw4dXqykqpm1e",
+              "verified": 0
+            }
+          ],
+          "sellerFeeBasisPoints": 500
+        },
+        "mint": "2K2aZkZBsqfhimSh5Lrmzx9eEbsBUEauKZNPfx9j1uTv",
+        "type": "metaplex",
+        "isMutable": 1,
+        "updateAuthority": "7BPrveGEsNmr5UU2bSzSmHh8wbhB1NWTw4dXqykqpm1e",
+        "primarySaleHappened": 1
+      }
+    },
+    "updated_at": "2022-02-14T03:17:32.049+00:00"
+  },
+  {
+    "id": 271,
+    "created_at": "2022-02-14T03:01:34.566375+00:00",
+    "hash": "2SymLaYgywziJC8Jw2JjtXSikt5Kmr1DvsdyMyfduQbC",
+    "wallet_address": "7eFY2pmZkEzpj7d2vjqWXtkQEV5veMJGuXkFTqncd6RQ",
+    "days_in_wallet": 87,
+    "data": {
+      "type": "token_account",
+      "account": "2SymLaYgywziJC8Jw2JjtXSikt5Kmr1DvsdyMyfduQbC",
+      "lamports": 1461600,
+      "metadata": {
+        "key": 4,
+        "data": {
+          "uri": "https://ipfs.io/ipfs/bafybeiclmiyrws5hrdzy4z7oxyhifri6gmhauk5tjm3oiwpydfr5zqimfm/solchicks-2561.json",
+          "name": "2561",
+          "image": "https://i.imgur.com/JBocyDw.jpg",
+          "symbol": "SOLCHICKS",
+          "attributes": [
+            { "value": "Blue-Green", "trait_type": "background" },
+            { "value": "SolChick", "trait_type": "base" },
+            { "value": "Santa_s Suit", "trait_type": "clothing" },
+            { "value": "Mohawk Hair", "trait_type": "hats" },
+            { "value": "Dress Shoes", "trait_type": "shoes" },
+            { "value": "Bruised Eyes", "trait_type": "eyeware" },
+            { "value": "Uncommon", "trait_type": "rarity" },
+            { "value": "hatched", "trait_type": "stage" },
+            { "value": "0", "trait_type": "breedingCount" }
+          ],
+          "collection": { "name": "SolChicks", "family": "SolChicks" },
+          "hashString": "1:Blue-Green,2:SolChick,3:Santa_s Suit,4:Mohawk Hair,5:Dress Shoes,6:Bruised Eyes,7:none,",
+          "properties": {
+            "creators": [
+              {
+                "share": 100,
+                "address": "H5ZQGeTv23nJRcFmEprRLuM9cTeJMajYvf2k1JhuLhE2"
+              }
+            ]
+          },
+          "description": "From the original SolChicks collection minted at solchicks.io. Collect, breed and train your own unique SolChicks in a revolutionary gaming ecosystem.",
+          "rarityScore": 17650,
+          "external_url": "https://www.solchicks.io/",
+          "animation_url": "",
+          "seller_fee_basis_points": 500
+        },
+        "mint": "2SymLaYgywziJC8Jw2JjtXSikt5Kmr1DvsdyMyfduQbC",
+        "type": "metaplex",
+        "isMutable": 1,
+        "updateAuthority": "7BPrveGEsNmr5UU2bSzSmHh8wbhB1NWTw4dXqykqpm1e",
+        "primarySaleHappened": 1
+      },
+      "rentEpoch": 279,
+      "tokenInfo": {
+        "name": "solchicks 2561",
+        "type": "nft",
+        "supply": "1",
+        "symbol": "SOLCHICKS",
+        "decimals": 0,
+        "tokenAuthority": "Fq6BWFSoze1zgseFGPTtwz8pr38ur3497yoiGisti338"
+      },
+      "ownerProgram": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+      "onchainMetadata": {
+        "key": 4,
+        "data": {
+          "uri": "https://ipfs.io/ipfs/bafybeiclmiyrws5hrdzy4z7oxyhifri6gmhauk5tjm3oiwpydfr5zqimfm/solchicks-2561.json",
+          "name": "solchicks 2561",
+          "symbol": "SOLCHICKS",
+          "creators": [
+            {
+              "share": 0,
+              "address": "9nicnEJ1pfssv3CWxQFMebFBrs5Cqun8WEmwwLqapLeX",
+              "verified": 1
+            },
+            {
+              "share": 100,
+              "address": "7BPrveGEsNmr5UU2bSzSmHh8wbhB1NWTw4dXqykqpm1e",
+              "verified": 0
+            }
+          ],
+          "sellerFeeBasisPoints": 500
+        },
+        "mint": "2SymLaYgywziJC8Jw2JjtXSikt5Kmr1DvsdyMyfduQbC",
+        "type": "metaplex",
+        "isMutable": 1,
+        "updateAuthority": "7BPrveGEsNmr5UU2bSzSmHh8wbhB1NWTw4dXqykqpm1e",
+        "primarySaleHappened": 1
+      }
+    },
+    "updated_at": "2022-02-15T15:31:21.92+00:00"
+  }
+]
