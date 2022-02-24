@@ -7,7 +7,7 @@ const createNftStatus = (nfts: INft[] | undefined) => ({
   nfts,
 });
 
-function useNft() {
+function useNftStatus() {
   const { publicKey: solanaAddress } = useWallet();
   const [nfts, setNfts] = useState<INft[]>();
 
@@ -29,4 +29,4 @@ function useNft() {
   return createNftStatus(nfts);
 }
 
-export default useNft;
+export default useNftStatus;

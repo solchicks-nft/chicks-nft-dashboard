@@ -9,14 +9,14 @@ import { EggBreedingConfirmModal } from '@/components/EggBreedingConfirmModal';
 import MobileViewAlert from '@/components/MobileViewAlert';
 import ConnectWalletAlert from '@/components/ConnectWalletAlert';
 import { HeartIcon } from '@/components/HeartIcon';
-import useNft from '@/hooks/useNft';
+import useNftStatus from '@/hooks/useNftStatus';
 
 export default function Index() {
   const { publicKey: solanaAddress } = useWallet();
   const [mobile, setMobile] = useState();
   const [isEggBreedingConfirmDialogOpen, setEggBreedingConfirmModal] =
     useState(false);
-  const { nfts } = useNft();
+  const { nfts } = useNftStatus();
   const [selectedNfts, setSelectedNfts] = useState<INft[]>([]);
 
   useEffect(() => {

@@ -96,3 +96,43 @@ export interface INft {
   data: INftResponseData;
   updated_at: Date;
 }
+
+export enum NftStatus {
+  NONE = 0,
+  START,
+  NFT_CHECKING,
+  TRANSFERRING,
+  SUBMITTING,
+  SUCCESS,
+  FAILED = 101,
+}
+
+export enum NftErrorCode {
+  NO_ERROR,
+  CANT_CONNECT_SOLANA,
+  NFT_AMOUNT_NOT_ENOUGH,
+  TRANSFER_FAILED,
+  SOLANA_NO_ASSOC_ACCOUNT,
+  SERVER_INVALID,
+  SUBMIT_FAILED,
+}
+
+export enum TokenStatusCode {
+  NONE = 0,
+  START,
+  TOKEN_AMOUNT_CHECKING,
+  TRANSFERRING,
+  SUBMITTING,
+  SUCCESS,
+  FAILED = 101,
+}
+
+export enum TokenErrorCode {
+  NO_ERROR,
+  CANT_CONNECT_SOLANA,
+  TOKEN_AMOUNT_NOT_ENOUGH,
+  TRANSFER_FAILED,
+  SOLANA_NO_ASSOC_ACCOUNT,
+  SERVER_INVALID,
+  SUBMIT_FAILED,
+}

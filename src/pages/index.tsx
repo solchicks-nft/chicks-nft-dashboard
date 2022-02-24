@@ -10,12 +10,12 @@ import SwapIcon from '@/components/SwapIcon';
 import { EggHatchConfirmModal } from '@/components/EggHatchConfirmModal';
 import MobileViewAlert from '@/components/MobileViewAlert';
 import ConnectWalletAlert from '@/components/ConnectWalletAlert';
-import useNft from '@/hooks/useNft';
+import useNftStatus from '@/hooks/useNftStatus';
 
 export default function Index() {
   const { publicKey: solanaAddress } = useWallet();
   const [mobile, setMobile] = useState();
-  const { nfts } = useNft();
+  const { nfts } = useNftStatus();
   const [isEggUpgradeConfirmDialogOpen, setEggUpgradeConfirmModal] =
     useState(false);
   const [isEggHatchingConfirmDialogOpen, setEggHatchingConfirmModal] =
