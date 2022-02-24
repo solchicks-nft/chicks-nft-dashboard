@@ -1,4 +1,3 @@
-import { useWallet } from '@solana/wallet-adapter-react';
 import * as React from 'react';
 import { SetStateAction, useEffect, useState } from 'react';
 import { isMobile } from 'react-device-detect';
@@ -9,9 +8,10 @@ import Footer from '@/components/Footer';
 import { EggClaimConfirmModal } from '@/components/EggClaimConfirmModal';
 import DiceIcon from '@/components/DiceIcon';
 import WeightIcon from '@/components/WeightIcon';
+import { useSolanaWallet } from '@/contexts/SolanaWalletProvider';
 
 export default function Claim() {
-  const { publicKey: solanaAddress } = useWallet();
+  const wallet = useSolanaWallet();
   const [mobile, setMobile] = useState();
   const [isEggClaimDialogOpen, setEggClaimDialogOpen] = useState(false);
   const GLEAM_WHITELIST_URL = `https://gleam.io/`;
@@ -26,8 +26,8 @@ export default function Claim() {
         <MobileViewAlert />
       ) : (
         <div>
-          {!solanaAddress && <ConnectWalletAlert />}
-          {solanaAddress && (
+          {!wallet.connected && <ConnectWalletAlert />}
+          {wallet.connected && (
             <div className="bg-cover bg-gray-100 min-h-screen">
               <Navbar />
               <main>
@@ -79,7 +79,6 @@ export default function Claim() {
               <EggClaimConfirmModal
                 isOpen={isEggClaimDialogOpen}
                 setIsOpen={setEggClaimDialogOpen}
-                walletAddress={solanaAddress.toString()}
               />
               <Footer />
             </div>

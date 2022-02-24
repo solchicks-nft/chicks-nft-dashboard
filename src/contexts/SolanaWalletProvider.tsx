@@ -17,6 +17,7 @@ import {
 } from '@solana/wallet-adapter-wallets';
 import {
   ConnectionProvider,
+  useWallet,
   WalletProvider,
 } from '@solana/wallet-adapter-react';
 import { WalletModalProvider } from '@solana/wallet-adapter-react-ui';
@@ -56,3 +57,5 @@ export const SolanaWalletProvider = ({
     </ConnectionProvider>
   );
 };
+
+export const useSolanaWallet = useWallet;

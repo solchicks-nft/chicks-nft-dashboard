@@ -1,26 +1,29 @@
 import * as React from 'react';
-import { Dialog, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
+import { Dialog, Transition } from '@headlessui/react';
 import RightArrowIcon from '@/components/RightArrowIcon';
-import { INft } from '@/utils/nftConsts';
+import { useNftExchange } from '@/contexts/NftExchangeContext';
 
 type EggHatchConfirmModalProps = {
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  selectedNft: INft | undefined;
 };
 
 export const EggHatchConfirmModal = ({
   isOpen,
   setIsOpen,
-  selectedNft,
 }: EggHatchConfirmModalProps) => {
+  const { selectedNft, setSelectedNft } = useNftExchange();
+
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog
         as="div"
         className="fixed inset-0 z-10 overflow-y-auto"
-        onClose={setIsOpen}
+        onClose={() => {
+          setIsOpen(false);
+          setSelectedNft(null);
+        }}
       >
         <div className="min-h-screen px-4 text-center">
           <Transition.Child
@@ -88,7 +91,10 @@ export const EggHatchConfirmModal = ({
                   type="button"
                   className="inline-flex justify-center px-4 py-2 justify-center px-8 py-3 border border-transparent text-base
                               font-bold rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10 mr-3 font-proximanovabold"
-                  onClick={() => setIsOpen(false)}
+                  onClick={() => {
+                    setIsOpen(false);
+                    setSelectedNft(null);
+                  }}
                 >
                   Yes
                 </button>
@@ -96,7 +102,10 @@ export const EggHatchConfirmModal = ({
                   type="button"
                   className="inline-flex justify-center px-4 py-2 justify-center px-8 py-3 border border-transparent text-base
                               font-bold rounded-md text-white bg-gray-500 hover:bg-gray-600 md:py-4 md:text-lg md:px-10 font-proximanovabold"
-                  onClick={() => setIsOpen(false)}
+                  onClick={() => {
+                    setIsOpen(false);
+                    setSelectedNft(null);
+                  }}
                 >
                   No
                 </button>

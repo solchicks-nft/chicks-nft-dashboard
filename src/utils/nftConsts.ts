@@ -136,3 +136,22 @@ export enum TokenErrorCode {
   SERVER_INVALID,
   SUBMIT_FAILED,
 }
+
+export enum BidStatusCode {
+  NONE = 0,
+  START,
+  BID_AMOUNT_CHECKING,
+  TRANSFERRING,
+  SUBMITTING,
+  SUCCESS,
+  FAILED = 101,
+}
+
+export interface INftBid {
+  hash: string;
+  image: string;
+  reserve_chicks_bid: number;
+  highest_chicks_bid: number;
+  start_date: number;
+  duration: number;
+}

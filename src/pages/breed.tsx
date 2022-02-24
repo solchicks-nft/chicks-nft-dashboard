@@ -10,6 +10,7 @@ import MobileViewAlert from '@/components/MobileViewAlert';
 import ConnectWalletAlert from '@/components/ConnectWalletAlert';
 import { HeartIcon } from '@/components/HeartIcon';
 import useNftStatus from '@/hooks/useNftStatus';
+import { useNftExchange } from '@/contexts/NftExchangeContext';
 
 export default function Index() {
   const { publicKey: solanaAddress } = useWallet();
@@ -17,7 +18,7 @@ export default function Index() {
   const [isEggBreedingConfirmDialogOpen, setEggBreedingConfirmModal] =
     useState(false);
   const { nfts } = useNftStatus();
-  const [selectedNfts, setSelectedNfts] = useState<INft[]>([]);
+  const { selectedNfts, setSelectedNfts } = useNftExchange();
 
   useEffect(() => {
     setMobile(isMobile as unknown as SetStateAction<undefined>);

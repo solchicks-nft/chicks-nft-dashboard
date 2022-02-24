@@ -1,26 +1,29 @@
 import * as React from 'react';
 import { Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
-import { INft } from '@/utils/nftConsts';
 import { HeartIcon } from '@/components/HeartIcon';
+import { useNftExchange } from '@/contexts/NftExchangeContext';
 
 type EggBreedingConfirmModalProps = {
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  selectedNfts: INft[] | undefined;
 };
 
 export const EggBreedingConfirmModal = ({
   isOpen,
   setIsOpen,
-  selectedNfts,
 }: EggBreedingConfirmModalProps) => {
+  const { selectedNfts, setSelectedNfts } = useNftExchange();
+
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog
         as="div"
         className="fixed inset-0 z-10 overflow-y-auto"
-        onClose={setIsOpen}
+        onClose={() => {
+          setIsOpen(false);
+          setSelectedNfts([]);
+        }}
       >
         <div className="min-h-screen px-4 text-center">
           <Transition.Child
@@ -88,7 +91,10 @@ export const EggBreedingConfirmModal = ({
                   type="button"
                   className="inline-flex justify-center px-4 py-2 justify-center px-8 py-3 border border-transparent text-base
                               font-bold rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10 mr-3 font-proximanovabold"
-                  onClick={() => setIsOpen(false)}
+                  onClick={() => {
+                    setIsOpen(false);
+                    setSelectedNfts([]);
+                  }}
                 >
                   Yes
                 </button>
@@ -96,7 +102,10 @@ export const EggBreedingConfirmModal = ({
                   type="button"
                   className="inline-flex justify-center px-4 py-2 justify-center px-8 py-3 border border-transparent text-base
                               font-bold rounded-md text-white bg-gray-500 hover:bg-gray-600 md:py-4 md:text-lg md:px-10 font-proximanovabold"
-                  onClick={() => setIsOpen(false)}
+                  onClick={() => {
+                    setIsOpen(false);
+                    setSelectedNfts([]);
+                  }}
                 >
                   No
                 </button>

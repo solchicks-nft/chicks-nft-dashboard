@@ -1,26 +1,29 @@
 import * as React from 'react';
-import { Dialog, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
+import { Dialog, Transition } from '@headlessui/react';
 import RightArrowIcon from '@/components/RightArrowIcon';
-import { INft } from '@/utils/nftConsts';
+import { useNftExchange } from '@/contexts/NftExchangeContext';
 
 type EggUpgradeConfirmModalProps = {
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  selectedNft: INft | undefined;
 };
 
 export const EggUpgradeConfirmModal = ({
   isOpen,
   setIsOpen,
-  selectedNft,
 }: EggUpgradeConfirmModalProps) => {
+  const { selectedNft, setSelectedNft } = useNftExchange();
+
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog
         as="div"
         className="fixed inset-0 z-10 overflow-y-auto"
-        onClose={setIsOpen}
+        onClose={() => {
+          setIsOpen(false);
+          setSelectedNft(null);
+        }}
       >
         <div className="min-h-screen px-4 text-center">
           <Transition.Child

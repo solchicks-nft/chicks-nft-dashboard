@@ -1,19 +1,19 @@
 import * as React from 'react';
 import { Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
+import { useSolanaWallet } from '@/contexts/SolanaWalletProvider';
 
 type EggClaimConfirmModalProps = {
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  walletAddress: string;
 };
 
 export const EggClaimConfirmModal = ({
   isOpen,
   setIsOpen,
-  walletAddress,
 }: EggClaimConfirmModalProps) => {
   const randomWin = Math.random() < 0.5;
+  const wallet = useSolanaWallet();
 
   return (
     <Transition appear show={isOpen} as={Fragment}>
@@ -60,7 +60,8 @@ export const EggClaimConfirmModal = ({
                 {process.env.NEXT_PUBLIC_ENVIRONMENT == `staging` &&
                   !randomWin && (
                     <p className="text-xl text-gray-500 font-proximanovaregular mt-2">
-                      Unfortunately your wallet <strong>{walletAddress}</strong>
+                      Unfortunately your wallet{` `}
+                      <strong>{wallet.publicKey}</strong>
                       {` `}
                       has not won a prize on this occasion.
                       <br />
@@ -71,7 +72,8 @@ export const EggClaimConfirmModal = ({
                   )}
                 {process.env.NEXT_PUBLIC_ENVIRONMENT == `staging` && randomWin && (
                   <p className="text-xl text-gray-500 font-proximanovaregular mt-2">
-                    Well done! Your wallet <strong>{walletAddress}</strong>
+                    Well done! Your wallet{` `}
+                    <strong>{wallet.publicKey?.toBase58()}</strong>
                     {` `}
                     won a limited edition 3D egg NFT on{` `}
                     {new Date().toJSON().slice(0, 10)}. Your prize will be

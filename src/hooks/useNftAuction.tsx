@@ -1,22 +1,26 @@
-import {
-  INft,
-  NftErrorCode,
-  NftStatus,
-  TokenErrorCode,
-  TokenStatusCode,
-} from '@/utils/nftConsts';
+import { INftBid } from '@/utils/nftConsts';
 import { useState } from 'react';
 
-const createNftAuctionStatus = (selectedNft: INft | undefined) => ({
-  selectedNft,
+const createNftAuctionStatus = (
+  bidNft: INftBid | undefined,
+  bidUserAddress: string | undefined,
+  bidAmount: number,
+) => ({
+  bidNft,
+  bidUserAddress,
+  bidAmount,
 });
 
 interface INftAuction {
-  selectedNft: INft | undefined;
+  bidNft: INftBid | undefined;
+  bidUserAddress: string | undefined;
+  bidAmount: number;
 }
 
 function useNftAuction(): INftAuction {
-  const [selectedNft, setSelectedNft] = useState<INft | undefined>();
+  const [bidNft, setBidNftHash] = useState<INftBid | undefined>();
+  const [bidUserAddress, setBidUserAddress] = useState<string | undefined>();
+  const [bidAmount, setBidAmount] = useState<number>(0);
 
-  return createNftAuctionStatus(selectedNft);
+  return createNftAuctionStatus(bidNft, bidUserAddress, bidAmount);
 }
