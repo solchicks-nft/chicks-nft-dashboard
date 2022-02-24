@@ -118,16 +118,14 @@ export default function Index() {
                                       selectedNfts,
                                     ) as INft[];
                                     newSelectedNfts.push(nft);
+                                    setSelectedNfts(newSelectedNfts);
                                     if (newSelectedNfts.length > 2) {
                                       newSelectedNfts.pop();
-                                      setSelectedNfts(newSelectedNfts);
                                     }
                                     if (newSelectedNfts.length == 2) {
                                       setEggBreedingConfirmModal(
                                         !isEggBreedingConfirmDialogOpen,
                                       );
-                                    } else {
-                                      setSelectedNfts(newSelectedNfts);
                                     }
                                   }}
                                 >
