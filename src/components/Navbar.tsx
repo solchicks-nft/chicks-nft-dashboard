@@ -1,6 +1,7 @@
 import ChicksLogo from '@/components/ChicksLogo';
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(` `);
@@ -22,21 +23,26 @@ export default function Navbar() {
         <div className="flex items-center justify-between flex-wrap">
           <div className="w-0 flex-1 flex items-center">
             <span className="flex p-2 rounded-lg">
-              <ChicksLogo />
+              <Link href="/" passHref>
+                <ChicksLogo />
+              </Link>
               <div className="hidden sm:block sm:ml-6">
                 <div className="flex space-x-4">
                   {navigation.map((item) => (
-                    <a
-                      key={item.name}
-                      href={item.href}
-                      className={classNames(
-                        item.current ? `text-white font-bold` : `text-gray-300`,
-                        `px-3 py-2 rounded-md text-md font-proximanovaregular hover:bg-indigo-800 hover:text-white`,
-                      )}
-                      aria-current={item.current ? `page` : undefined}
-                    >
-                      {item.name}
-                    </a>
+                    <Link href={item.href} key={item.name}>
+                      <a
+                        key={item.name}
+                        className={classNames(
+                          item.current
+                            ? `text-white font-bold`
+                            : `text-gray-300`,
+                          `px-3 py-2 rounded-md text-md font-proximanovaregular hover:bg-indigo-800 hover:text-white`,
+                        )}
+                        aria-current={item.current ? `page` : undefined}
+                      >
+                        {item.name}
+                      </a>
+                    </Link>
                   ))}
                 </div>
               </div>

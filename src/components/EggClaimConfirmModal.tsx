@@ -57,7 +57,7 @@ export const EggClaimConfirmModal = ({
                 Confirm
               </Dialog.Title>
               <div className="mt-2 mb-8">
-                {process.env.NEXT_PUBLIC_ENVIRONMENT != `staging` &&
+                {process.env.NEXT_PUBLIC_ENVIRONMENT == `staging` &&
                   !randomWin && (
                     <p className="text-xl text-gray-500 font-proximanovaregular mt-2">
                       Unfortunately your wallet <strong>{walletAddress}</strong>
@@ -69,7 +69,7 @@ export const EggClaimConfirmModal = ({
                       whitelist raffle.
                     </p>
                   )}
-                {process.env.NEXT_PUBLIC_ENVIRONMENT != `staging` && randomWin && (
+                {process.env.NEXT_PUBLIC_ENVIRONMENT == `staging` && randomWin && (
                   <p className="text-xl text-gray-500 font-proximanovaregular mt-2">
                     Well done! Your wallet <strong>{walletAddress}</strong>
                     {` `}
