@@ -57,7 +57,7 @@ export const EggBreedingConfirmModal = ({
                 Confirm
               </Dialog.Title>
               <div className="mt-2 mb-8">
-                {selectedNfts && selectedNfts.length > 0 && (
+                {selectedNfts && selectedNfts.length === 2 && (
                   <div className="py-6 w-full flex items-center justify-center">
                     <div>
                       <img
@@ -71,8 +71,8 @@ export const EggBreedingConfirmModal = ({
                     </div>
                     <div>
                       <img
-                        src={`../img/sample_egg.png`}
-                        alt="egg"
+                        src={selectedNfts[1].data.metadata.data.image}
+                        alt={selectedNfts[1].data.metadata.data.description}
                         className="h-48 rounded-xl"
                       />
                     </div>

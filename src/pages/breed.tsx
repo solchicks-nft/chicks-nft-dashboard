@@ -30,6 +30,16 @@ export default function Index() {
     return nft.days_in_wallet >= 60 && nftValues.length > 0;
   }
 
+  function isNftSelectedForBreeding(nft: INft) {
+    const newSelectedNfts = Object.assign([], selectedNfts) as INft[];
+    for (let i = 0; i < newSelectedNfts.length; i++) {
+      if (newSelectedNfts[i].hash === nft.hash) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   return (
     <div>
       {mobile ? (
@@ -90,36 +100,90 @@ export default function Index() {
                           </div>
                           <div className="flex-auto mt-5">
                             <div className="rounded-md shadow">
-                              <button
-                                className={
-                                  isEggBreedingAvailable(nft)
-                                    ? `w-full flex items-center justify-center px-8 py-3 border border-transparent
+                              {!isNftSelectedForBreeding(nft) && (
+                                <button
+                                  className={
+                                    isEggBreedingAvailable(nft)
+                                      ? `w-full flex items-center justify-center px-8 py-3 border border-transparent
                                     text-base font-bold rounded-md text-white bg-indigo-600 hover:bg-indigo-700
                                     md:py-4 md:text-lg md:px-10 font-proximanovabold`
-                                    : `w-full flex items-center justify-center px-8 py-3 border border-transparent
+                                      : `w-full flex items-center justify-center px-8 py-3 border border-transparent
                                     text-base font-bold rounded-md text-white bg-gray-300 md:py-4 md:text-lg md:px-10
                                     font-proximanovabold`
-                                }
-                                disabled={!isEggBreedingAvailable(nft)}
-                                onClick={() => {
-                                  if (selectedNfts.length > 2) {
-                                    setSelectedNfts([]);
                                   }
-                                  const updatedSelectedNfts = [...selectedNfts];
-                                  updatedSelectedNfts.push(nft);
-                                  setSelectedNfts(updatedSelectedNfts);
-                                }}
-                              >
-                                <div className="pr-3">
-                                  <HeartIcon
-                                    fill="#fff"
-                                    height="32"
-                                    width="32"
-                                  />
-                                </div>
-                                {` `}
-                                Select ({selectedNfts.length})
-                              </button>
+                                  disabled={!isEggBreedingAvailable(nft)}
+                                  onClick={() => {
+                                    const newSelectedNfts = Object.assign(
+                                      [],
+                                      selectedNfts,
+                                    ) as INft[];
+                                    newSelectedNfts.push(nft);
+                                    if (newSelectedNfts.length > 2) {
+                                      newSelectedNfts.pop();
+                                      setSelectedNfts(newSelectedNfts);
+                                    }
+                                    if (newSelectedNfts.length == 2) {
+                                      setEggBreedingConfirmModal(
+                                        !isEggBreedingConfirmDialogOpen,
+                                      );
+                                    } else {
+                                      setSelectedNfts(newSelectedNfts);
+                                    }
+                                  }}
+                                >
+                                  <div className="pr-3">
+                                    <HeartIcon
+                                      fill="#fff"
+                                      height="32"
+                                      width="32"
+                                    />
+                                  </div>
+                                  {` `}
+                                  Select
+                                </button>
+                              )}
+                              {isNftSelectedForBreeding(nft) && (
+                                <button
+                                  className={
+                                    isEggBreedingAvailable(nft)
+                                      ? `w-full flex items-center justify-center px-8 py-3 border border-transparent
+                                    text-base font-bold rounded-md text-white bg-indigo-600 hover:bg-indigo-700
+                                    md:py-4 md:text-lg md:px-10 font-proximanovabold`
+                                      : `w-full flex items-center justify-center px-8 py-3 border border-transparent
+                                    text-base font-bold rounded-md text-white bg-gray-300 md:py-4 md:text-lg md:px-10
+                                    font-proximanovabold`
+                                  }
+                                  disabled={!isEggBreedingAvailable(nft)}
+                                  onClick={() => {
+                                    const newSelectedNfts = Object.assign(
+                                      [],
+                                      selectedNfts,
+                                    ) as INft[];
+                                    for (
+                                      let i = 0;
+                                      i < newSelectedNfts.length;
+                                      i++
+                                    ) {
+                                      if (
+                                        newSelectedNfts[i].hash === nft.hash
+                                      ) {
+                                        newSelectedNfts.splice(i, 1);
+                                      }
+                                    }
+                                    setSelectedNfts(newSelectedNfts);
+                                  }}
+                                >
+                                  <div className="pr-3">
+                                    <HeartIcon
+                                      fill="#fff"
+                                      height="32"
+                                      width="32"
+                                    />
+                                  </div>
+                                  {` `}
+                                  Unselect
+                                </button>
+                              )}
                             </div>
                           </div>
                         </div>
