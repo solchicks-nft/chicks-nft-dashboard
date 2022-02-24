@@ -1,26 +1,24 @@
+import { useEffect, useState } from 'react';
+import SampleNftBid from '@/assets/data/sample-nft-bid.json';
 import { INftBid } from '@/utils/nftConsts';
-import { useState } from 'react';
+import { useSolanaWallet } from '@/contexts/SolanaWalletProvider';
 
-const createNftAuctionStatus = (
-  bidNft: INftBid | undefined,
-  bidUserAddress: string | undefined,
-  bidAmount: number,
-) => ({
-  bidNft,
-  bidUserAddress,
-  bidAmount,
+const createNftAuction = (nftBid: INftBid | undefined) => ({
+  nftBid,
 });
 
-interface INftAuction {
-  bidNft: INftBid | undefined;
-  bidUserAddress: string | undefined;
-  bidAmount: number;
+function useNftAction() {
+  const wallet = useSolanaWallet();
+  const [nftBid, setNftBid] = useState<INftBid>();
+
+  useEffect(() => {
+    async function fetchData() {
+      setNftBid(SampleNftBid as unknown as INftBid);
+    }
+    if (wallet) fetchData().then();
+  }, [wallet]);
+
+  return createNftAuction(nftBid);
 }
 
-function useNftAuction(): INftAuction {
-  const [bidNft, setBidNftHash] = useState<INftBid | undefined>();
-  const [bidUserAddress, setBidUserAddress] = useState<string | undefined>();
-  const [bidAmount, setBidAmount] = useState<number>(0);
-
-  return createNftAuctionStatus(bidNft, bidUserAddress, bidAmount);
-}
+export default useNftAction;

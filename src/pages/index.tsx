@@ -56,7 +56,7 @@ export default function Index() {
                   <h1 className="text-4xl font-bold tracking-tight text-gray-900 font-proximanovabold">
                     Exchange
                   </h1>
-                  <div className="mb-4 mt-4 text-xl text-gray-700 dark:bg-gray-700 dark:text-gray-300 font-proximanova">
+                  <div className="mb-4 mt-4 text-xl text-gray-700 dark:bg-gray-700 dark:text-gray-300 font-proximanovaregular">
                     <span className="font-medium">
                       Please select an NFT to swap for an exclusive 3D NFT.
                     </span>
@@ -84,7 +84,7 @@ export default function Index() {
                           </div>
                           <div className="flex text-sm py-1">
                             <ClockIcon className="h-5 w-5 text-blue-500 mr-2" />
-                            <span className="font-proximanova">
+                            <span className="font-proximanovaregular">
                               {nft.days_in_wallet}
                               {` `}
                               {nft.days_in_wallet == 1 ? `day` : `days`} in
@@ -93,7 +93,7 @@ export default function Index() {
                           </div>
                           <div className="flex text-sm py-1">
                             <SparklesIcon className="h-5 w-5 text-blue-500 mr-2 " />
-                            <span className="font-proximanova">
+                            <span className="font-proximanovaregular">
                               {isEggUpgradeAvailable(nft)
                                 ? `Egg upgrade available`
                                 : `Egg upgrade unavailable`}
@@ -101,7 +101,7 @@ export default function Index() {
                           </div>
                           <div className="flex text-sm py-1">
                             <SparklesIcon className="h-5 w-5 text-blue-500 mr-2" />
-                            <span className="font-proximanova">
+                            <span className="font-proximanovaregular">
                               {isEggHatchingAvailable(nft)
                                 ? `Egg hatching available`
                                 : `Egg hatching unavailable`}
@@ -151,7 +151,7 @@ export default function Index() {
                   )}
                   {!nfts ||
                     (nfts.length === 0 && (
-                      <div className="font-proximanova">
+                      <div className="font-proximanovaregular">
                         We could not find any SolChicks NFTs in your wallet.
                       </div>
                     ))}

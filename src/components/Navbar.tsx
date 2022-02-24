@@ -1,7 +1,7 @@
-import ChicksLogo from '@/components/ChicksLogo';
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { ChicksLogo } from '@/components/ChicksLogo';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(` `);
@@ -12,6 +12,11 @@ export default function Navbar() {
 
   const navigation = [
     { name: `Exchange`, href: `/`, current: router.pathname == `/` },
+    {
+      name: `Auction`,
+      href: `auction`,
+      current: router.pathname == `/auction`,
+    },
     { name: `Claim`, href: `claim`, current: router.pathname == `/claim` },
     { name: `Breed`, href: `breed`, current: router.pathname == `/breed` },
     { name: `Help`, href: `help`, current: router.pathname == `/help` },

@@ -35,10 +35,10 @@ export default function Claim() {
                   <h1 className="text-4xl font-bold tracking-tight text-gray-900 font-proximanovabold">
                     Claim
                   </h1>
-                  <div className="mb-4 mt-4 text-xl text-gray-700 dark:bg-gray-700 dark:text-gray-300 font-proximanova">
+                  <div className="mb-4 mt-4 text-xl text-gray-700 dark:bg-gray-700 dark:text-gray-300 font-proximanovaregular">
                     <p className="font-medium">
                       Here is your chance to win one of our limited edition 3D
-                      NFT eggs. Take your pick 😉
+                      NFT eggs.
                     </p>
                   </div>
                   <div className="pt-6 w-full flex justify-center">
