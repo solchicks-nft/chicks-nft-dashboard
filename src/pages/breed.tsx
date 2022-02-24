@@ -1,56 +1,31 @@
 import { useWallet } from '@solana/wallet-adapter-react';
 import { SetStateAction, useEffect, useState } from 'react';
 import { isMobile } from 'react-device-detect';
-import SampleNfts from '../assets/data/sample-nfts.json';
 import { INft } from '@/utils/nftConsts';
 import { ClockIcon, SparklesIcon } from '@heroicons/react/solid';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { EggUpgradeConfirmModal } from '@/components/EggUpgradeConfirmModal';
-import SwapIcon from '@/components/SwapIcon';
-import { EggHatchConfirmModal } from '@/components/EggHatchConfirmModal';
+import { EggBreedingConfirmModal } from '@/components/EggBreedingConfirmModal';
 import MobileViewAlert from '@/components/MobileViewAlert';
 import ConnectWalletAlert from '@/components/ConnectWalletAlert';
+import { HeartIcon } from '@/components/HeartIcon';
+import useNft from '@/hooks/useNft';
 
 export default function Index() {
   const { publicKey: solanaAddress } = useWallet();
   const [mobile, setMobile] = useState();
-  const [nfts, setNfts] = useState<INft[]>();
-  const [isEggUpgradeConfirmDialogOpen, setEggUpgradeConfirmModal] =
+  const [isEggBreedingConfirmDialogOpen, setEggBreedingConfirmModal] =
     useState(false);
-  const [isEggHatchingConfirmDialogOpen, setEggHatchingConfirmModal] =
-    useState(false);
-  const [selectedNft, setSelectedNft] = useState<INft>();
+  const { nfts } = useNft();
+  const [selectedNfts, setSelectedNfts] = useState<INft[]>([]);
 
   useEffect(() => {
     setMobile(isMobile as unknown as SetStateAction<undefined>);
   }, [setMobile]);
 
-  useEffect(() => {
-    async function fetchData() {
-      if (process.env.NODE_ENV != `development`) {
-        const respData = await fetch(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/wallet?id=${solanaAddress}`,
-        );
-        const jsonData = await respData.json();
-        setNfts(jsonData.data);
-      } else {
-        setNfts(SampleNfts as unknown as INft[]);
-      }
-    }
-    if (solanaAddress) fetchData().then();
-  }, [solanaAddress]);
-
-  function isEggUpgradeAvailable(nft: INft) {
+  function isEggBreedingAvailable(nft: INft) {
     const nftValues = nft.data.metadata.data.attributes.filter(
-      (o) => o.value == `egg` || o.value == `hatched`,
-    );
-    return nft.days_in_wallet >= 60 && nftValues.length === 0;
-  }
-
-  function isEggHatchingAvailable(nft: INft) {
-    const nftValues = nft.data.metadata.data.attributes.filter(
-      (o) => o.value == `egg`,
+      (o) => o.value != `egg` && o.value == `hatched`,
     );
     return nft.days_in_wallet >= 60 && nftValues.length > 0;
   }
@@ -68,11 +43,11 @@ export default function Index() {
               <main>
                 <div className="max-w-7xl mx-auto py-12 sm:px-6 lg:px-12 bg-white">
                   <h1 className="text-4xl font-bold tracking-tight text-gray-900 font-proximanovabold">
-                    Exchange
+                    Breed
                   </h1>
                   <div className="mb-4 mt-4 text-xl text-gray-700 dark:bg-gray-700 dark:text-gray-300 font-proximanova">
                     <span className="font-medium">
-                      Please select an NFT to swap for an exclusive 3D NFT.
+                      Please select two NFTs to breed.
                     </span>
                   </div>
                   {nfts && (
@@ -108,25 +83,16 @@ export default function Index() {
                           <div className="flex text-sm py-1">
                             <SparklesIcon className="h-5 w-5 text-blue-500 mr-2 " />
                             <span className="font-proximanova">
-                              {isEggUpgradeAvailable(nft)
-                                ? `Egg upgrade available`
-                                : `Egg upgrade unavailable`}
-                            </span>
-                          </div>
-                          <div className="flex text-sm py-1">
-                            <SparklesIcon className="h-5 w-5 text-blue-500 mr-2" />
-                            <span className="font-proximanova">
-                              {isEggHatchingAvailable(nft)
-                                ? `Egg hatching available`
-                                : `Egg hatching unavailable`}
+                              {isEggBreedingAvailable(nft)
+                                ? `Breeding available`
+                                : `Breeding unavailable`}
                             </span>
                           </div>
                           <div className="flex-auto mt-5">
                             <div className="rounded-md shadow">
                               <button
                                 className={
-                                  isEggHatchingAvailable(nft) ||
-                                  isEggUpgradeAvailable(nft)
+                                  isEggBreedingAvailable(nft)
                                     ? `w-full flex items-center justify-center px-8 py-3 border border-transparent
                                     text-base font-bold rounded-md text-white bg-indigo-600 hover:bg-indigo-700
                                     md:py-4 md:text-lg md:px-10 font-proximanovabold`
@@ -134,28 +100,25 @@ export default function Index() {
                                     text-base font-bold rounded-md text-white bg-gray-300 md:py-4 md:text-lg md:px-10
                                     font-proximanovabold`
                                 }
-                                disabled={
-                                  !isEggHatchingAvailable(nft) &&
-                                  !isEggUpgradeAvailable(nft)
-                                }
+                                disabled={!isEggBreedingAvailable(nft)}
                                 onClick={() => {
-                                  setSelectedNft(nft);
-                                  if (isEggUpgradeAvailable(nft)) {
-                                    setEggUpgradeConfirmModal(
-                                      !isEggUpgradeConfirmDialogOpen,
-                                    );
+                                  if (selectedNfts.length > 2) {
+                                    setSelectedNfts([]);
                                   }
-                                  if (isEggHatchingAvailable(nft)) {
-                                    setEggHatchingConfirmModal(
-                                      !isEggHatchingConfirmDialogOpen,
-                                    );
-                                  }
+                                  const updatedSelectedNfts = [...selectedNfts];
+                                  updatedSelectedNfts.push(nft);
+                                  setSelectedNfts(updatedSelectedNfts);
                                 }}
                               >
-                                <div className="pr-5">
-                                  <SwapIcon />
+                                <div className="pr-3">
+                                  <HeartIcon
+                                    fill="#fff"
+                                    height="32"
+                                    width="32"
+                                  />
                                 </div>
-                                Exchange
+                                {` `}
+                                Select ({selectedNfts.length})
                               </button>
                             </div>
                           </div>
@@ -172,15 +135,10 @@ export default function Index() {
                 </div>
                 <Footer />
               </main>
-              <EggUpgradeConfirmModal
-                isOpen={isEggUpgradeConfirmDialogOpen}
-                setIsOpen={setEggUpgradeConfirmModal}
-                selectedNft={selectedNft}
-              />
-              <EggHatchConfirmModal
-                isOpen={isEggHatchingConfirmDialogOpen}
-                setIsOpen={setEggHatchingConfirmModal}
-                selectedNft={selectedNft}
+              <EggBreedingConfirmModal
+                isOpen={isEggBreedingConfirmDialogOpen}
+                setIsOpen={setEggBreedingConfirmModal}
+                selectedNfts={selectedNfts}
               />
             </div>
           )}

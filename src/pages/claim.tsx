@@ -7,6 +7,8 @@ import ConnectWalletAlert from '@/components/ConnectWalletAlert';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { EggClaimConfirmModal } from '@/components/EggClaimConfirmModal';
+import DiceIcon from '@/components/DiceIcon';
+import WeightIcon from '@/components/WeightIcon';
 
 export default function Claim() {
   const { publicKey: solanaAddress } = useWallet();
@@ -46,24 +48,29 @@ export default function Claim() {
                       className="h-96 rounded-xl"
                     />
                   </div>
-                  <div className="pt-6 w-full flex justify-center">
+                  <div className="pt-10 w-full flex justify-center">
                     <button
-                      className="items-center justify-center px-8 py-3 border border-transparent
+                      className="items-center justify-center px-6 py-3 border border-transparent
                                     text-base font-bold rounded-md text-white bg-indigo-600 hover:bg-indigo-700
-                                    md:py-4 md:text-lg md:px-10 font-proximanovabold mr-3"
+                                    md:py-4 md:text-lg md:px-6 font-proximanovabold mr-3 flex"
                       onClick={() => {
                         setEggClaimDialogOpen(!isEggClaimDialogOpen);
                       }}
                     >
-                      {/* eslint-disable-next-line react/no-unescaped-entities */}
-                      I'm Feeling Lucky
+                      <div className="pr-5">
+                        <DiceIcon />
+                      </div>
+                      I&#39;m Feeling Lucky
                     </button>
                     <button
                       className="items-center justify-center px-8 py-3 border border-transparent
                                     text-base font-bold rounded-md text-white bg-indigo-600 hover:bg-indigo-700
-                                    md:py-4 md:text-lg md:px-10 font-proximanovabold"
+                                    md:py-4 md:text-lg md:px-10 font-proximanovabold flex"
                       onClick={() => window.open(GLEAM_WHITELIST_URL, `_blank`)}
                     >
+                      <div className="pr-5">
+                        <WeightIcon />
+                      </div>
                       Challenge Me
                     </button>
                   </div>

@@ -34,7 +34,7 @@ export default function Help() {
                       Find all the answers to commonly asked questions.
                     </span>
                     <div className="font-proximanova mt-12">
-                      <div className="mb-6">
+                      <div className="mb-12">
                         <p className="font-proximanovabold">
                           How can I exchange my NFT for a new 3D one?
                         </p>
@@ -46,7 +46,7 @@ export default function Help() {
                           arcu. Maecenas vel lacinia nisi, id imperdiet purus.
                         </p>
                       </div>
-                      <div className="mb-9">
+                      <div className="mb-12">
                         <p className="font-proximanovabold">
                           How can I exchange my NFT for a new 3D one?
                         </p>
@@ -58,7 +58,7 @@ export default function Help() {
                           arcu. Maecenas vel lacinia nisi, id imperdiet purus.
                         </p>
                       </div>
-                      <div className="mb-9">
+                      <div className="mb-12">
                         <p className="font-proximanovabold">
                           How can I exchange my NFT for a new 3D one?
                         </p>
@@ -70,7 +70,7 @@ export default function Help() {
                           arcu. Maecenas vel lacinia nisi, id imperdiet purus.
                         </p>
                       </div>
-                      <div className="mb-9">
+                      <div className="mb-12">
                         <p className="font-proximanovabold">
                           How can I exchange my NFT for a new 3D one?
                         </p>
@@ -82,7 +82,7 @@ export default function Help() {
                           arcu. Maecenas vel lacinia nisi, id imperdiet purus.
                         </p>
                       </div>
-                      <div className="mb-9">
+                      <div className="mb-12">
                         <p className="font-proximanovabold">
                           How can I exchange my NFT for a new 3D one?
                         </p>
