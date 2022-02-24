@@ -13,7 +13,7 @@ function useNft() {
 
   useEffect(() => {
     async function fetchData() {
-      if (process.env.NODE_ENV != `development`) {
+      if (process.env.NEXT_PUBLIC_ENVIRONMENT != `staging`) {
         const respData = await fetch(
           `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/wallet?id=${solanaAddress}`,
         );

@@ -1,7 +1,6 @@
 import { useWallet } from '@solana/wallet-adapter-react';
 import { SetStateAction, useEffect, useState } from 'react';
 import { isMobile } from 'react-device-detect';
-import SampleNfts from '../assets/data/sample-nfts.json';
 import { INft } from '@/utils/nftConsts';
 import { ClockIcon, SparklesIcon } from '@heroicons/react/solid';
 import Navbar from '@/components/Navbar';
@@ -11,11 +10,12 @@ import SwapIcon from '@/components/SwapIcon';
 import { EggHatchConfirmModal } from '@/components/EggHatchConfirmModal';
 import MobileViewAlert from '@/components/MobileViewAlert';
 import ConnectWalletAlert from '@/components/ConnectWalletAlert';
+import useNft from '@/hooks/useNft';
 
 export default function Index() {
   const { publicKey: solanaAddress } = useWallet();
   const [mobile, setMobile] = useState();
-  const [nfts, setNfts] = useState<INft[]>();
+  const { nfts } = useNft();
   const [isEggUpgradeConfirmDialogOpen, setEggUpgradeConfirmModal] =
     useState(false);
   const [isEggHatchingConfirmDialogOpen, setEggHatchingConfirmModal] =
@@ -25,21 +25,6 @@ export default function Index() {
   useEffect(() => {
     setMobile(isMobile as unknown as SetStateAction<undefined>);
   }, [setMobile]);
-
-  useEffect(() => {
-    async function fetchData() {
-      if (process.env.NODE_ENV != `development`) {
-        const respData = await fetch(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/wallet?id=${solanaAddress}`,
-        );
-        const jsonData = await respData.json();
-        setNfts(jsonData.data);
-      } else {
-        setNfts(SampleNfts as unknown as INft[]);
-      }
-    }
-    if (solanaAddress) fetchData().then();
-  }, [solanaAddress]);
 
   function isEggUpgradeAvailable(nft: INft) {
     const nftValues = nft.data.metadata.data.attributes.filter(

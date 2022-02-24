@@ -1,4 +1,4 @@
-[context.production]
+[context.staging]
   publish = ".next/"
   command = "yarn build:dev"
-  environment = { NEXT_PUBLIC_CLUSTER = "testnet", NEXT_PUBLIC_BACKEND_URL = "http://localhost:8080" }
+  environment = { NEXT_PUBLIC_CLUSTER = "testnet", NEXT_PUBLIC_BACKEND_URL = "http://localhost:8080", NEXT_PUBLIC_ENVIRONMENT = "staging" }

@@ -57,21 +57,23 @@ export const EggClaimConfirmModal = ({
                 Confirm
               </Dialog.Title>
               <div className="mt-2 mb-8">
-                {process.env.NODE_ENV === `development` && !randomWin && (
+                {process.env.NEXT_PUBLIC_ENVIRONMENT != `staging` &&
+                  !randomWin && (
+                    <p className="text-xl text-gray-500 font-proximanovaregular mt-2">
+                      Unfortunately your wallet <strong>{walletAddress}</strong>
+                      {` `}
+                      has not won a prize on this occasion.
+                      <br />
+                      Don&#39;t give up yet! Click on the{` `}
+                      <strong>Challenge Me</strong> button to participate in our
+                      whitelist raffle.
+                    </p>
+                  )}
+                {process.env.NEXT_PUBLIC_ENVIRONMENT != `staging` && randomWin && (
                   <p className="text-xl text-gray-500 font-proximanovaregular mt-2">
-                    Unfortunately your wallet <strong>{walletAddress}</strong>
+                    Well done! Your wallet <strong>{walletAddress}</strong>
                     {` `}
-                    has not won a prize on this occasion.
-                    <br />
-                    Don&#39;t give up yet! Click on the{` `}
-                    <strong>Challenge Me</strong> button to participate in our
-                    whitelist raffle.
-                  </p>
-                )}
-                {process.env.NODE_ENV === `development` && randomWin && (
-                  <p className="text-xl text-gray-500 font-proximanovaregular mt-2">
-                    Well done! Your wallet <strong>{walletAddress}</strong> won
-                    a limited edition 3D egg NFT on{` `}
+                    won a limited edition 3D egg NFT on{` `}
                     {new Date().toJSON().slice(0, 10)}. Your prize will be
                     arriving shortly.
                   </p>
