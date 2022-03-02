@@ -97,14 +97,14 @@ export interface INft {
   updated_at: Date;
 }
 
-export enum NftStatus {
+export enum NftStatusCode {
   NONE = 0,
   START,
-  NFT_CHECKING,
+  CHECKING,
   TRANSFERRING,
-  SUBMITTING,
+  PREPARING,
   SUCCESS,
-  FAILED = 101,
+  FAILED,
 }
 
 export enum NftErrorCode {
@@ -115,6 +115,12 @@ export enum NftErrorCode {
   SOLANA_NO_ASSOC_ACCOUNT,
   SERVER_INVALID,
   SUBMIT_FAILED,
+}
+
+export enum NftExchangeType {
+  NONE,
+  EGG,
+  HATCH,
 }
 
 export enum TokenStatusCode {

@@ -10,18 +10,16 @@ import SwapIcon from '@/components/SwapIcon';
 import { EggHatchConfirmModal } from '@/components/EggHatchConfirmModal';
 import MobileViewAlert from '@/components/MobileViewAlert';
 import ConnectWalletAlert from '@/components/ConnectWalletAlert';
-import useNftStatus from '@/hooks/useNftStatus';
 import { useNftExchange } from '@/contexts/NftExchangeContext';
 
 export default function Index() {
   const { publicKey: solanaAddress } = useWallet();
   const [mobile, setMobile] = useState();
-  const { nfts } = useNftStatus();
   const [isEggUpgradeConfirmDialogOpen, setEggUpgradeConfirmModal] =
     useState(false);
   const [isEggHatchingConfirmDialogOpen, setEggHatchingConfirmModal] =
     useState(false);
-  const { setSelectedNft } = useNftExchange();
+  const { setSelectedNft, nfts } = useNftExchange();
 
   useEffect(() => {
     setMobile(isMobile as unknown as SetStateAction<undefined>);

@@ -9,7 +9,6 @@ import { EggBreedingConfirmModal } from '@/components/EggBreedingConfirmModal';
 import MobileViewAlert from '@/components/MobileViewAlert';
 import ConnectWalletAlert from '@/components/ConnectWalletAlert';
 import { HeartIcon } from '@/components/HeartIcon';
-import useNftStatus from '@/hooks/useNftStatus';
 import { useNftExchange } from '@/contexts/NftExchangeContext';
 
 export default function Index() {
@@ -17,8 +16,7 @@ export default function Index() {
   const [mobile, setMobile] = useState();
   const [isEggBreedingConfirmDialogOpen, setEggBreedingConfirmModal] =
     useState(false);
-  const { nfts } = useNftStatus();
-  const { selectedNfts, setSelectedNfts } = useNftExchange();
+  const { selectedNfts, setSelectedNfts, nfts } = useNftExchange();
 
   useEffect(() => {
     setMobile(isMobile as unknown as SetStateAction<undefined>);
