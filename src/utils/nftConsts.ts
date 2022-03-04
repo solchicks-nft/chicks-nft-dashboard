@@ -161,3 +161,8 @@ export interface INftBid {
   start_date: number;
   duration: number;
 }
+
+export interface INftWhiteList {
+  owner: string;
+  hash: string;
+}

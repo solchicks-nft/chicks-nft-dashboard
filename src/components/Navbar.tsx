@@ -11,13 +11,17 @@ export default function Navbar() {
   const router = useRouter();
 
   const navigation = [
-    { name: `Exchange`, href: `/`, current: router.pathname == `/` },
+    { name: `Claim`, href: `/`, current: router.pathname == `/` },
+    {
+      name: `Exchange`,
+      href: `exchange`,
+      current: router.pathname == `/exchange`,
+    },
     {
       name: `Auction`,
       href: `auction`,
       current: router.pathname == `/auction`,
     },
-    { name: `Claim`, href: `claim`, current: router.pathname == `/claim` },
     { name: `Breed`, href: `breed`, current: router.pathname == `/breed` },
     { name: `Help`, href: `help`, current: router.pathname == `/help` },
   ];

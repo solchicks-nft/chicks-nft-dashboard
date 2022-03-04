@@ -28,21 +28,21 @@ export default function NftStatusMessage({
       {nftStatusCode === NftStatusCode.CHECKING && (
         <div className="w-full flex items-center justify-center">
           <p className="text-xl text-gray-500 font-proximanovaregular mt-2">
-            Checking if your NFT is eligible for an exchange...
+            Checking if NFT is eligible for an exchange...
           </p>
         </div>
       )}
       {nftStatusCode === NftStatusCode.TRANSFERRING && (
         <div className="w-full flex items-center justify-center">
           <p className="text-xl text-gray-500 font-proximanovaregular mt-2">
-            Transferring your NFT to our smart contract...
+            Transferring NFT to our smart contract...
           </p>
         </div>
       )}
       {nftStatusCode === NftStatusCode.PREPARING && (
         <div className="w-full flex items-center justify-center">
           <p className="text-xl text-gray-500 font-proximanovaregular mt-2">
-            Preparing your NFT...
+            Preparing NFT...
           </p>
         </div>
       )}

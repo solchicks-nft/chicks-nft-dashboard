@@ -122,6 +122,8 @@ export const NftExchangeProvider = ({
       setNftStatusCode(NftStatusCode.CHECKING);
       await sleep(2000);
       setNftStatusCode(NftStatusCode.TRANSFERRING);
+      await sleep(2000);
+      setNftStatusCode(NftStatusCode.PREPARING);
       fetchNftData().then(async () => {
         await sleep(2000);
         setNftStatusCode(NftStatusCode.SUCCESS);

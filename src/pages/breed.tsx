@@ -23,10 +23,7 @@ export default function Index() {
   }, [setMobile]);
 
   function isEggBreedingAvailable(nft: INft) {
-    const nftValues = nft.data.metadata.data.attributes.filter(
-      (o) => o.value != `egg` && o.value == `hatched`,
-    );
-    return nft.days_in_wallet >= 60 && nftValues.length > 0;
+    return nft.days_in_wallet >= 60;
   }
 
   function isNftSelectedForBreeding(nft: INft) {
