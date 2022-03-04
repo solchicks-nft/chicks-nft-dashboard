@@ -7,7 +7,7 @@ const createNftAuction = (nftBid: INftBid | undefined) => ({
   nftBid,
 });
 
-function useNftAction() {
+function useNftAuction() {
   const wallet = useSolanaWallet();
   const [nftBid, setNftBid] = useState<INftBid>();
 
@@ -21,4 +21,4 @@ function useNftAction() {
   return createNftAuction(nftBid);
 }
 
-export default useNftAction;
+export default useNftAuction;

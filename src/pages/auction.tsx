@@ -8,12 +8,12 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { ChicksLogo } from '@/components/ChicksLogo';
 import Countdown from 'react-countdown';
-import useNftAction from '@/hooks/useNftAuction';
+import useNftAuction from '@/hooks/useNftAuction';
 
-export default function Action() {
+export default function Auction() {
   const wallet = useSolanaWallet();
   const [mobile, setMobile] = useState();
-  const { nftBid } = useNftAction();
+  const { nftBid } = useNftAuction();
   const [nftBidAmount, setNftBidAmount] = useState(0);
 
   useEffect(() => {

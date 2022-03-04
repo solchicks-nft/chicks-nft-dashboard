@@ -11,7 +11,7 @@ import ConnectWalletAlert from '@/components/ConnectWalletAlert';
 import { HeartIcon } from '@/components/HeartIcon';
 import { useNftExchange } from '@/contexts/NftExchangeContext';
 
-export default function Index() {
+export default function Breed() {
   const { publicKey: solanaAddress } = useWallet();
   const [mobile, setMobile] = useState();
   const [isEggBreedingConfirmDialogOpen, setEggBreedingConfirmModal] =
