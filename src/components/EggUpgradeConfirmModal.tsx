@@ -6,6 +6,7 @@ import { useNftExchange } from '@/contexts/NftExchangeContext';
 import { Oval } from 'react-loader-spinner';
 import { NftStatusCode } from '@/utils/nftConsts';
 import NftStatusMessage from '@/components/NftStatusMessage';
+import TargetEggUpgradeImage from '@/components/TargetEggUpgradeImage';
 
 type EggUpgradeConfirmModalProps = {
   isOpen: boolean;
@@ -107,13 +108,7 @@ export const EggUpgradeConfirmModal = ({
                         <div className="px-4">
                           <RightArrowIcon />
                         </div>
-                        <div>
-                          <img
-                            src={`../img/sample_egg.png`}
-                            alt="egg"
-                            className="h-48 rounded-xl"
-                          />
-                        </div>
+                        <TargetEggUpgradeImage selectedNft={selectedNft} />
                       </div>
                       <p className="text-xl text-gray-500 font-proximanovaregular mt-2">
                         Please confirm that you want to exchange your NFT for a

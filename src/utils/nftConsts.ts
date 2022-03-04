@@ -166,3 +166,23 @@ export interface INftWhiteList {
   owner: string;
   hash: string;
 }
+
+export enum NftRarityEnum {
+  COMMON = `Common`,
+  LEGENDARY = `Legendary`,
+  MYTHICAL = `Mythical`,
+  RARE = `Rare`,
+  UNCOMMON = `Uncommon`,
+}
+
+export function getTargetUpgradeWave(nftNumber: number) {
+  if (nftNumber > 0 && nftNumber <= 2500) {
+    return `wave1`;
+  }
+  if (nftNumber > 2500 && nftNumber <= 5000) {
+    return `wave2`;
+  }
+  if (nftNumber >= 5000) {
+    return `wave3`;
+  }
+}

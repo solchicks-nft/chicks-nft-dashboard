@@ -51,9 +51,9 @@ export default function Index() {
                     <div>
                       <div className="pt-10 w-full flex justify-center font-proximanovaregular text-lg">
                         Congratulations, your address is eligible for our
-                        whitelist raffle 🎉
+                        whitelist raffle!
                       </div>
-                      <div className="pt-7 w-full flex justify-center">
+                      <div className="pt-9 w-full flex justify-center">
                         <button
                           className="items-center justify-center px-6 py-3 border border-transparent
                                     text-base font-bold rounded-md text-white bg-indigo-600 hover:bg-indigo-700
