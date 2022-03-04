@@ -5,7 +5,7 @@ import { INft } from '@/utils/nftConsts';
 import { ClockIcon, SparklesIcon } from '@heroicons/react/solid';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { EggBreedingConfirmModal } from '@/components/EggBreedingConfirmModal';
+import { ChicksBreedingConfirmModal } from '@/components/ChicksBreedingConfirmModal';
 import MobileViewAlert from '@/components/MobileViewAlert';
 import ConnectWalletAlert from '@/components/ConnectWalletAlert';
 import { HeartIcon } from '@/components/HeartIcon';
@@ -193,7 +193,7 @@ export default function Index() {
                 </div>
                 <Footer />
               </main>
-              <EggBreedingConfirmModal
+              <ChicksBreedingConfirmModal
                 isOpen={isEggBreedingConfirmDialogOpen}
                 setIsOpen={setEggBreedingConfirmModal}
               />

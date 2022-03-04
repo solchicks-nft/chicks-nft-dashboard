@@ -10,21 +10,31 @@ function classNames(...classes: string[]) {
 export default function Navbar() {
   const router = useRouter();
 
-  const navigation = [
-    { name: `Claim`, href: `/`, current: router.pathname == `/` },
-    {
-      name: `Exchange`,
-      href: `exchange`,
-      current: router.pathname == `/exchange`,
-    },
-    {
-      name: `Auction`,
-      href: `auction`,
-      current: router.pathname == `/auction`,
-    },
-    { name: `Breed`, href: `breed`, current: router.pathname == `/breed` },
-    { name: `Help`, href: `help`, current: router.pathname == `/help` },
-  ];
+  const navigation =
+    process.env.NEXT_PUBLIC_ENVIRONMENT === `production`
+      ? [
+          { name: `Claim`, href: `/`, current: router.pathname == `/` },
+          { name: `Help`, href: `help`, current: router.pathname == `/help` },
+        ]
+      : [
+          { name: `Claim`, href: `/`, current: router.pathname == `/` },
+          {
+            name: `Exchange`,
+            href: `exchange`,
+            current: router.pathname == `/exchange`,
+          },
+          {
+            name: `Auction`,
+            href: `auction`,
+            current: router.pathname == `/auction`,
+          },
+          {
+            name: `Breed`,
+            href: `breed`,
+            current: router.pathname == `/breed`,
+          },
+          { name: `Help`, href: `help`, current: router.pathname == `/help` },
+        ];
 
   return (
     <div className="bg-indigo-900">

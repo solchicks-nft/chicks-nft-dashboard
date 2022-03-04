@@ -1,3 +1,5 @@
+export const MINIMUM_EGG_HATCHING_DURATION = 0;
+
 export interface INftAttribute {
   value: string;
   trait_type: string;

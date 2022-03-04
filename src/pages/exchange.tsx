@@ -1,7 +1,7 @@
 import { useWallet } from '@solana/wallet-adapter-react';
 import { SetStateAction, useEffect, useState } from 'react';
 import { isMobile } from 'react-device-detect';
-import { INft } from '@/utils/nftConsts';
+import { MINIMUM_EGG_HATCHING_DURATION, INft } from '@/utils/nftConsts';
 import { ClockIcon, SparklesIcon } from '@heroicons/react/solid';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -29,14 +29,17 @@ export default function Exchange() {
     const nftValues = nft.data.metadata.data.attributes.filter(
       (o) => o.value == `egg` || o.value == `hatched`,
     );
-    return nft.days_in_wallet >= 60 && nftValues.length === 0;
+    return nftValues.length === 0;
   }
 
   function isEggHatchingAvailable(nft: INft) {
     const nftValues = nft.data.metadata.data.attributes.filter(
       (o) => o.value == `egg`,
     );
-    return nft.days_in_wallet >= 60 && nftValues.length > 0;
+    return (
+      nft.days_in_wallet >= MINIMUM_EGG_HATCHING_DURATION &&
+      nftValues.length > 0
+    );
   }
 
   return (
