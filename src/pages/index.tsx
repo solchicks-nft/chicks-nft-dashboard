@@ -40,7 +40,7 @@ export default function Index() {
                                     md:py-4 md:text-lg md:px-6 font-proximanovabold mr-3 flex"
                   onClick={() =>
                     window.open(
-                      `${GLEAM_WHITELIST_URL}?address=${nftWhitelist?.owner}&hash=${nftWhitelist?.hash}`,
+                      `${GLEAM_WHITELIST_URL}?Address=${nftWhitelist?.owner}&Hash=${nftWhitelist?.hash}`,
                       `_blank`,
                     )
                   }
