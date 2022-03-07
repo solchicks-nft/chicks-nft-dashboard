@@ -29,16 +29,16 @@ export default function Help() {
                   <h1 className="text-4xl font-bold tracking-tight text-gray-900 font-proximanovabold">
                     Help
                   </h1>
-                  <div className="mb-4 mt-4 text-xl text-gray-700 dark:bg-gray-700 dark:text-gray-300 font-proximanova">
+                  <div className="mb-4 mt-4 text-xl text-gray-700 dark:bg-gray-700 dark:text-gray-300 font-proximanovaregular">
                     <span className="font-medium">
                       Find all the answers to commonly asked questions.
                     </span>
-                    <div className="font-proximanova mt-12">
+                    <div className="font-proximanovaregular mt-12">
                       <div className="mb-12">
                         <p className="font-proximanovabold">
                           How can I exchange my NFT for a new 3D one?
                         </p>
-                        <p className="font-proximanova">
+                        <p className="font-proximanovaregular">
                           Lorem ipsum dolor sit amet, consectetur adipiscing
                           elit. Donec ornare aliquam nulla. Quisque pretium
                           purus id justo posuere, nec interdum libero finibus.
@@ -50,7 +50,7 @@ export default function Help() {
                         <p className="font-proximanovabold">
                           How can I exchange my NFT for a new 3D one?
                         </p>
-                        <p className="font-proximanova">
+                        <p className="font-proximanovaregular">
                           Lorem ipsum dolor sit amet, consectetur adipiscing
                           elit. Donec ornare aliquam nulla. Quisque pretium
                           purus id justo posuere, nec interdum libero finibus.
@@ -62,7 +62,7 @@ export default function Help() {
                         <p className="font-proximanovabold">
                           How can I exchange my NFT for a new 3D one?
                         </p>
-                        <p className="font-proximanova">
+                        <p className="font-proximanovaregular">
                           Lorem ipsum dolor sit amet, consectetur adipiscing
                           elit. Donec ornare aliquam nulla. Quisque pretium
                           purus id justo posuere, nec interdum libero finibus.
@@ -74,7 +74,7 @@ export default function Help() {
                         <p className="font-proximanovabold">
                           How can I exchange my NFT for a new 3D one?
                         </p>
-                        <p className="font-proximanova">
+                        <p className="font-proximanovaregular">
                           Lorem ipsum dolor sit amet, consectetur adipiscing
                           elit. Donec ornare aliquam nulla. Quisque pretium
                           purus id justo posuere, nec interdum libero finibus.
@@ -86,7 +86,7 @@ export default function Help() {
                         <p className="font-proximanovabold">
                           How can I exchange my NFT for a new 3D one?
                         </p>
-                        <p className="font-proximanova">
+                        <p className="font-proximanovaregular">
                           Lorem ipsum dolor sit amet, consectetur adipiscing
                           elit. Donec ornare aliquam nulla. Quisque pretium
                           purus id justo posuere, nec interdum libero finibus.

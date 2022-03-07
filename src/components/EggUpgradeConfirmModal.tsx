@@ -1,26 +1,40 @@
 import * as React from 'react';
-import { Dialog, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
+import { Dialog, Transition } from '@headlessui/react';
 import RightArrowIcon from '@/components/RightArrowIcon';
-import { INft } from '@/utils/nftConsts';
+import { useNftExchange } from '@/contexts/NftExchangeContext';
+import { Oval } from 'react-loader-spinner';
+import { NftStatusCode } from '@/utils/nftConsts';
+import NftStatusMessage from '@/components/NftStatusMessage';
+import TargetEggUpgradeImage from '@/components/TargetEggUpgradeImage';
 
 type EggUpgradeConfirmModalProps = {
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  selectedNft: INft | undefined;
 };
 
 export const EggUpgradeConfirmModal = ({
   isOpen,
   setIsOpen,
-  selectedNft,
 }: EggUpgradeConfirmModalProps) => {
+  const {
+    selectedNft,
+    setSelectedNft,
+    exchange2dNftForEgg,
+    nftIsProcessing,
+    nftStatusCode,
+    setNftStatusCode,
+  } = useNftExchange();
+
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog
         as="div"
         className="fixed inset-0 z-10 overflow-y-auto"
-        onClose={setIsOpen}
+        onClose={() => {
+          setSelectedNft(null);
+          setIsOpen(false);
+        }}
       >
         <div className="min-h-screen px-4 text-center">
           <Transition.Child
@@ -57,49 +71,124 @@ export const EggUpgradeConfirmModal = ({
                 Confirm
               </Dialog.Title>
               <div className="mt-2 mb-8">
-                {selectedNft && (
-                  <div className="py-6 w-full flex items-center justify-center">
-                    <div>
-                      <img
-                        src={selectedNft.data.metadata.data.image}
-                        alt={selectedNft.data.metadata.data.description}
-                        className="h-48 rounded-xl"
+                {selectedNft && nftIsProcessing && (
+                  <div>
+                    <div className="py-6 w-full flex items-center justify-center">
+                      <Oval
+                        color="#5850EC"
+                        secondaryColor="#FFFFF"
+                        height={80}
+                        width={80}
                       />
                     </div>
-                    <div className="px-4">
-                      <RightArrowIcon />
-                    </div>
-                    <div>
-                      <img
-                        src={`../img/sample_egg.png`}
-                        alt="egg"
-                        className="h-48 rounded-xl"
-                      />
-                    </div>
+                    <NftStatusMessage nftStatusCode={nftStatusCode} />
                   </div>
                 )}
-                <p className="text-xl text-gray-500 font-proximanovaregular mt-2">
-                  Please confirm that you want to exchange your NFT for a
-                  limited edition 3D egg.
-                </p>
+                {selectedNft &&
+                  !nftIsProcessing &&
+                  nftStatusCode === NftStatusCode.SUCCESS && (
+                    <div className="w-full flex">
+                      <p className="text-xl text-gray-500 font-proximanovaregular mt-6">
+                        Your NFT exchange is complete.
+                      </p>
+                    </div>
+                  )}
+                {selectedNft &&
+                  !nftIsProcessing &&
+                  nftStatusCode === NftStatusCode.NONE && (
+                    <div>
+                      <div className="py-6 w-full flex items-center justify-center">
+                        <div>
+                          <img
+                            src={selectedNft.data.metadata.data.image}
+                            alt={selectedNft.data.metadata.data.description}
+                            className="h-48 rounded-xl"
+                          />
+                        </div>
+                        <div className="px-4">
+                          <RightArrowIcon />
+                        </div>
+                        <TargetEggUpgradeImage selectedNft={selectedNft} />
+                      </div>
+                      <p className="text-xl text-gray-500 font-proximanovaregular mt-2">
+                        Please confirm that you want to exchange your NFT for a
+                        limited edition 3D egg.
+                      </p>
+                    </div>
+                  )}
+                {!selectedNft ||
+                  (selectedNft && nftStatusCode === NftStatusCode.FAILED && (
+                    <div>
+                      <p className="text-xl text-gray-500 font-proximanovaregular mt-2">
+                        An error has occurred, please try again.
+                      </p>
+                    </div>
+                  ))}
+                {!selectedNft && (
+                  <div>
+                    <p className="text-xl text-gray-500 font-proximanovaregular mt-2">
+                      An error has occurred, please try again.
+                    </p>
+                  </div>
+                )}
               </div>
               <div className="mt-4 flex justify-end">
-                <button
-                  type="button"
-                  className="inline-flex justify-center px-4 py-2 justify-center px-8 py-3 border border-transparent text-base
+                {selectedNft &&
+                  !nftIsProcessing &&
+                  nftStatusCode === NftStatusCode.NONE && (
+                    <div>
+                      <button
+                        type="button"
+                        className="inline-flex justify-center px-4 py-2 justify-center px-8 py-3 border border-transparent text-base
                               font-bold rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10 mr-3 font-proximanovabold"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Yes
-                </button>
-                <button
-                  type="button"
-                  className="inline-flex justify-center px-4 py-2 justify-center px-8 py-3 border border-transparent text-base
+                        onClick={() => exchange2dNftForEgg()}
+                      >
+                        Yes
+                      </button>
+                      <button
+                        type="button"
+                        className="inline-flex justify-center px-4 py-2 justify-center px-8 py-3 border border-transparent text-base
                               font-bold rounded-md text-white bg-gray-500 hover:bg-gray-600 md:py-4 md:text-lg md:px-10 font-proximanovabold"
-                  onClick={() => setIsOpen(false)}
-                >
-                  No
-                </button>
+                        onClick={() => {
+                          setIsOpen(false);
+                          setNftStatusCode(NftStatusCode.NONE);
+                        }}
+                      >
+                        No
+                      </button>
+                    </div>
+                  )}
+                {(selectedNft && nftIsProcessing) ||
+                  (selectedNft && nftStatusCode === NftStatusCode.SUCCESS && (
+                    <div>
+                      <button
+                        type="button"
+                        className="inline-flex justify-center px-4 py-2 justify-center px-8 py-3 border border-transparent text-base
+                              font-bold rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10 mr-3 font-proximanovabold"
+                        onClick={() => {
+                          setIsOpen(false);
+                          setNftStatusCode(NftStatusCode.NONE);
+                        }}
+                      >
+                        Ok
+                      </button>
+                    </div>
+                  ))}
+                {!selectedNft && (
+                  <div>
+                    <button
+                      type="button"
+                      className="inline-flex justify-center px-4 py-2 justify-center px-8 py-3 border border-transparent text-base
+                              font-bold rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10 mr-3 font-proximanovabold"
+                      onClick={() => {
+                        setIsOpen(false);
+                        setNftStatusCode(NftStatusCode.NONE);
+                      }}
+                    >
+                      Ok
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
           </Transition.Child>

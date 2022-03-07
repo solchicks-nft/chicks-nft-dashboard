@@ -19,3 +19,8 @@
     src: url(/fonts/Proxima-Nova-Regular.woff2) format('woff2');
   }
 }
+
+/*noinspection ALL*/
+.splash-image {
+  background-image:linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url(/img/splash.jpg)
+}

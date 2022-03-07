@@ -1,6 +1,7 @@
-import ChicksLogo from '@/components/ChicksLogo';
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
+import { ChicksLogo } from '@/components/ChicksLogo';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(` `);
@@ -9,12 +10,31 @@ function classNames(...classes: string[]) {
 export default function Navbar() {
   const router = useRouter();
 
-  const navigation = [
-    { name: `Exchange`, href: `/`, current: router.pathname == `/` },
-    { name: `Claim`, href: `claim`, current: router.pathname == `/claim` },
-    { name: `Breed`, href: `breed`, current: router.pathname == `/breed` },
-    { name: `Help`, href: `help`, current: router.pathname == `/help` },
-  ];
+  const navigation =
+    process.env.NEXT_PUBLIC_ENVIRONMENT === `production`
+      ? [
+          { name: `Claim`, href: `/`, current: router.pathname == `/` },
+          { name: `Help`, href: `help`, current: router.pathname == `/help` },
+        ]
+      : [
+          { name: `Claim`, href: `/`, current: router.pathname == `/` },
+          {
+            name: `Exchange`,
+            href: `exchange`,
+            current: router.pathname == `/exchange`,
+          },
+          {
+            name: `Auction`,
+            href: `auction`,
+            current: router.pathname == `/auction`,
+          },
+          {
+            name: `Breed`,
+            href: `breed`,
+            current: router.pathname == `/breed`,
+          },
+          { name: `Help`, href: `help`, current: router.pathname == `/help` },
+        ];
 
   return (
     <div className="bg-indigo-900">
@@ -22,21 +42,28 @@ export default function Navbar() {
         <div className="flex items-center justify-between flex-wrap">
           <div className="w-0 flex-1 flex items-center">
             <span className="flex p-2 rounded-lg">
-              <ChicksLogo />
+              <Link href="/" passHref>
+                <div className="hover:cursor-pointer hover:opacity-50">
+                  <ChicksLogo />
+                </div>
+              </Link>
               <div className="hidden sm:block sm:ml-6">
                 <div className="flex space-x-4">
                   {navigation.map((item) => (
-                    <a
-                      key={item.name}
-                      href={item.href}
-                      className={classNames(
-                        item.current ? `text-white font-bold` : `text-gray-300`,
-                        `px-3 py-2 rounded-md text-md font-proximanovaregular hover:bg-indigo-800 hover:text-white`,
-                      )}
-                      aria-current={item.current ? `page` : undefined}
-                    >
-                      {item.name}
-                    </a>
+                    <Link href={item.href} key={item.name}>
+                      <a
+                        key={item.name}
+                        className={classNames(
+                          item.current
+                            ? `text-white font-bold`
+                            : `text-gray-300`,
+                          `px-3 py-2 rounded-md text-md font-proximanovaregular hover:bg-indigo-800 hover:text-white`,
+                        )}
+                        aria-current={item.current ? `page` : undefined}
+                      >
+                        {item.name}
+                      </a>
+                    </Link>
                   ))}
                 </div>
               </div>

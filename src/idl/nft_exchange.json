@@ -1,0 +1,64 @@
+{
+  "version": "0.1.0",
+  "name": "nft_exchange",
+  "instructions": [
+    {
+      "name": "lock",
+      "accounts": [
+        {
+          "name": "payer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "nftAccount",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "nftMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "exchangeAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "nonceExchangeLock",
+          "type": "u8"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "ExchangeAccount",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "lockedAt",
+            "type": "u64"
+          }
+        ]
+      }
+    }
+  ],
+  "metadata": {
+    "address": "CuZH1kjgjMbLEyn87P1J31YdrqioMkGbdJcLPu9wgvpE"
+  }
+}

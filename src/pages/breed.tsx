@@ -5,29 +5,25 @@ import { INft } from '@/utils/nftConsts';
 import { ClockIcon, SparklesIcon } from '@heroicons/react/solid';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { EggBreedingConfirmModal } from '@/components/EggBreedingConfirmModal';
+import { ChicksBreedingConfirmModal } from '@/components/ChicksBreedingConfirmModal';
 import MobileViewAlert from '@/components/MobileViewAlert';
 import ConnectWalletAlert from '@/components/ConnectWalletAlert';
 import { HeartIcon } from '@/components/HeartIcon';
-import useNft from '@/hooks/useNft';
+import { useNftExchange } from '@/contexts/NftExchangeContext';
 
-export default function Index() {
+export default function Breed() {
   const { publicKey: solanaAddress } = useWallet();
   const [mobile, setMobile] = useState();
   const [isEggBreedingConfirmDialogOpen, setEggBreedingConfirmModal] =
     useState(false);
-  const { nfts } = useNft();
-  const [selectedNfts, setSelectedNfts] = useState<INft[]>([]);
+  const { selectedNfts, setSelectedNfts, nfts } = useNftExchange();
 
   useEffect(() => {
     setMobile(isMobile as unknown as SetStateAction<undefined>);
   }, [setMobile]);
 
   function isEggBreedingAvailable(nft: INft) {
-    const nftValues = nft.data.metadata.data.attributes.filter(
-      (o) => o.value != `egg` && o.value == `hatched`,
-    );
-    return nft.days_in_wallet >= 60 && nftValues.length > 0;
+    return nft.days_in_wallet >= 60;
   }
 
   function isNftSelectedForBreeding(nft: INft) {
@@ -55,7 +51,7 @@ export default function Index() {
                   <h1 className="text-4xl font-bold tracking-tight text-gray-900 font-proximanovabold">
                     Breed
                   </h1>
-                  <div className="mb-4 mt-4 text-xl text-gray-700 dark:bg-gray-700 dark:text-gray-300 font-proximanova">
+                  <div className="mb-4 mt-4 text-xl text-gray-700 dark:bg-gray-700 dark:text-gray-300 font-proximanovaregular">
                     <span className="font-medium">
                       Please select two NFTs to breed.
                     </span>
@@ -83,7 +79,7 @@ export default function Index() {
                           </div>
                           <div className="flex text-sm py-1">
                             <ClockIcon className="h-5 w-5 text-blue-500 mr-2" />
-                            <span className="font-proximanova">
+                            <span className="font-proximanovaregular">
                               {nft.days_in_wallet}
                               {` `}
                               {nft.days_in_wallet == 1 ? `day` : `days`} in
@@ -92,7 +88,7 @@ export default function Index() {
                           </div>
                           <div className="flex text-sm py-1">
                             <SparklesIcon className="h-5 w-5 text-blue-500 mr-2 " />
-                            <span className="font-proximanova">
+                            <span className="font-proximanovaregular">
                               {isEggBreedingAvailable(nft)
                                 ? `Breeding available`
                                 : `Breeding unavailable`}
@@ -118,16 +114,14 @@ export default function Index() {
                                       selectedNfts,
                                     ) as INft[];
                                     newSelectedNfts.push(nft);
+                                    setSelectedNfts(newSelectedNfts);
                                     if (newSelectedNfts.length > 2) {
                                       newSelectedNfts.pop();
-                                      setSelectedNfts(newSelectedNfts);
                                     }
                                     if (newSelectedNfts.length == 2) {
                                       setEggBreedingConfirmModal(
                                         !isEggBreedingConfirmDialogOpen,
                                       );
-                                    } else {
-                                      setSelectedNfts(newSelectedNfts);
                                     }
                                   }}
                                 >
@@ -192,17 +186,16 @@ export default function Index() {
                   )}
                   {!nfts ||
                     (nfts.length === 0 && (
-                      <div className="font-proximanova">
+                      <div className="font-proximanovaregular">
                         We could not find any SolChicks NFTs in your wallet.
                       </div>
                     ))}
                 </div>
                 <Footer />
               </main>
-              <EggBreedingConfirmModal
+              <ChicksBreedingConfirmModal
                 isOpen={isEggBreedingConfirmDialogOpen}
                 setIsOpen={setEggBreedingConfirmModal}
-                selectedNfts={selectedNfts}
               />
             </div>
           )}

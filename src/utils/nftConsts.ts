@@ -1,3 +1,5 @@
+export const MINIMUM_EGG_HATCHING_DURATION = 0;
+
 export interface INftAttribute {
   value: string;
   trait_type: string;
@@ -95,4 +97,94 @@ export interface INft {
   days_in_wallet: number;
   data: INftResponseData;
   updated_at: Date;
+}
+
+export enum NftStatusCode {
+  NONE = 0,
+  START,
+  CHECKING,
+  TRANSFERRING,
+  PREPARING,
+  SUCCESS,
+  FAILED,
+}
+
+export enum NftErrorCode {
+  NO_ERROR,
+  CANT_CONNECT_SOLANA,
+  NFT_AMOUNT_NOT_ENOUGH,
+  TRANSFER_FAILED,
+  SOLANA_NO_ASSOC_ACCOUNT,
+  SERVER_INVALID,
+  SUBMIT_FAILED,
+}
+
+export enum NftExchangeType {
+  NONE,
+  EGG,
+  HATCH,
+}
+
+export enum TokenStatusCode {
+  NONE = 0,
+  START,
+  TOKEN_AMOUNT_CHECKING,
+  TRANSFERRING,
+  SUBMITTING,
+  SUCCESS,
+  FAILED = 101,
+}
+
+export enum TokenErrorCode {
+  NO_ERROR,
+  CANT_CONNECT_SOLANA,
+  TOKEN_AMOUNT_NOT_ENOUGH,
+  TRANSFER_FAILED,
+  SOLANA_NO_ASSOC_ACCOUNT,
+  SERVER_INVALID,
+  SUBMIT_FAILED,
+}
+
+export enum BidStatusCode {
+  NONE = 0,
+  START,
+  BID_AMOUNT_CHECKING,
+  TRANSFERRING,
+  SUBMITTING,
+  SUCCESS,
+  FAILED = 101,
+}
+
+export interface INftBid {
+  hash: string;
+  image: string;
+  reserve_chicks_bid: number;
+  highest_chicks_bid: number;
+  start_date: number;
+  duration: number;
+}
+
+export interface INftWhitelist {
+  owner: string;
+  hash: string;
+}
+
+export enum NftRarityEnum {
+  COMMON = `Common`,
+  LEGENDARY = `Legendary`,
+  MYTHICAL = `Mythical`,
+  RARE = `Rare`,
+  UNCOMMON = `Uncommon`,
+}
+
+export function getTargetUpgradeWave(nftNumber: number) {
+  if (nftNumber > 0 && nftNumber <= 2500) {
+    return `wave1`;
+  }
+  if (nftNumber > 2500 && nftNumber <= 5000) {
+    return `wave2`;
+  }
+  if (nftNumber >= 5000) {
+    return `wave3`;
+  }
 }
