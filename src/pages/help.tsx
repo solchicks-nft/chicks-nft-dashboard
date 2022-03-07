@@ -36,62 +36,14 @@ export default function Help() {
                     <div className="font-proximanovaregular mt-12">
                       <div className="mb-12">
                         <p className="font-proximanovabold">
-                          How can I exchange my NFT for a new 3D one?
+                          How can I know if I am eligible to win a 3D egg NFT?
                         </p>
-                        <p className="font-proximanovaregular">
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit. Donec ornare aliquam nulla. Quisque pretium
-                          purus id justo posuere, nec interdum libero finibus.
-                          Proin feugiat mi et auctor volutpat. Ut eget mauris
-                          arcu. Maecenas vel lacinia nisi, id imperdiet purus.
-                        </p>
-                      </div>
-                      <div className="mb-12">
-                        <p className="font-proximanovabold">
-                          How can I exchange my NFT for a new 3D one?
-                        </p>
-                        <p className="font-proximanovaregular">
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit. Donec ornare aliquam nulla. Quisque pretium
-                          purus id justo posuere, nec interdum libero finibus.
-                          Proin feugiat mi et auctor volutpat. Ut eget mauris
-                          arcu. Maecenas vel lacinia nisi, id imperdiet purus.
-                        </p>
-                      </div>
-                      <div className="mb-12">
-                        <p className="font-proximanovabold">
-                          How can I exchange my NFT for a new 3D one?
-                        </p>
-                        <p className="font-proximanovaregular">
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit. Donec ornare aliquam nulla. Quisque pretium
-                          purus id justo posuere, nec interdum libero finibus.
-                          Proin feugiat mi et auctor volutpat. Ut eget mauris
-                          arcu. Maecenas vel lacinia nisi, id imperdiet purus.
-                        </p>
-                      </div>
-                      <div className="mb-12">
-                        <p className="font-proximanovabold">
-                          How can I exchange my NFT for a new 3D one?
-                        </p>
-                        <p className="font-proximanovaregular">
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit. Donec ornare aliquam nulla. Quisque pretium
-                          purus id justo posuere, nec interdum libero finibus.
-                          Proin feugiat mi et auctor volutpat. Ut eget mauris
-                          arcu. Maecenas vel lacinia nisi, id imperdiet purus.
-                        </p>
-                      </div>
-                      <div className="mb-12">
-                        <p className="font-proximanovabold">
-                          How can I exchange my NFT for a new 3D one?
-                        </p>
-                        <p className="font-proximanovaregular">
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit. Donec ornare aliquam nulla. Quisque pretium
-                          purus id justo posuere, nec interdum libero finibus.
-                          Proin feugiat mi et auctor volutpat. Ut eget mauris
-                          arcu. Maecenas vel lacinia nisi, id imperdiet purus.
+                        <p className="font-proximanovaregular text-base">
+                          Between March 1 to 9th, we will be airdropping 1
+                          $CHICKS token to 75,000 non-$CHICKS holders. To check
+                          if you&#039;re eligible, just connect your wallet
+                          address and click on the{` `}
+                          <strong>I&#039;m Feeling Lucky</strong> button.
                         </p>
                       </div>
                     </div>
