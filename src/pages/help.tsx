@@ -36,13 +36,15 @@ export default function Help() {
                     <div className="font-proximanovaregular mt-12">
                       <div className="mb-12">
                         <p className="font-proximanovabold">
-                          How can I know if I am eligible to win a 3D egg NFT?
+                          How can I know if I am eligible to win a limited
+                          edition egg NFT?
                         </p>
+                        <br />
                         <p className="font-proximanovaregular text-base">
-                          Between March 1 to 9th, we will be airdropping 1
-                          $CHICKS token to 75,000 non-$CHICKS holders. To check
-                          if you&#039;re eligible, first check for 1 $CHICKS
-                          token in your wallet, connect your wallet to
+                          For a two week window in March, we will be airdropping
+                          1 $CHICKS token to 75,000 non-$CHICKS holders. To
+                          check if you&#039;re eligible, first check for 1
+                          $CHICKS token in your wallet, connect your wallet to
                           nft.solchicks.io and then browse to the{` `}
                           <strong>Claim</strong> page.
                         </p>
