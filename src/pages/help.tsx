@@ -41,9 +41,10 @@ export default function Help() {
                         <p className="font-proximanovaregular text-base">
                           Between March 1 to 9th, we will be airdropping 1
                           $CHICKS token to 75,000 non-$CHICKS holders. To check
-                          if you&#039;re eligible, just connect your wallet
-                          address and click on the{` `}
-                          <strong>I&#039;m Feeling Lucky</strong> button.
+                          if you&#039;re eligible, first check for 1 $CHICKS
+                          token in your wallet, connect your wallet to
+                          nft.solchicks.io and then browse to the{` `}
+                          <strong>Claim</strong> page.
                         </p>
                       </div>
                     </div>
