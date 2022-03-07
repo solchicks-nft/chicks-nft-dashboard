@@ -164,7 +164,7 @@ export interface INftBid {
   duration: number;
 }
 
-export interface INftWhiteList {
+export interface INftWhitelist {
   owner: string;
   hash: string;
 }

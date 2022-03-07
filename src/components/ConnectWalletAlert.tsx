@@ -2,7 +2,7 @@ import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 
 export default function ConnectWalletAlert() {
   return (
-    <div className="flex flex-col h-screen bg-[url('/background.jpg')] bg-cover">
+    <div className="flex flex-col h-screen splash-image bg-cover">
       <div className="flex flex-col my-auto mx-auto items-center">
         <WalletMultiButton
           className="p-10 border border-transparent shadow-sm text-sm

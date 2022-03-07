@@ -1,14 +1,15 @@
 import { useCallback, useEffect, useState } from 'react';
-import { INftWhiteList } from '@/utils/nftConsts';
+import { INftWhitelist } from '@/utils/nftConsts';
 import { useSolanaWallet } from '@/contexts/SolanaWalletProvider';
 
-const createNftWhiteList = (whitelistAddress: INftWhiteList | undefined) => ({
-  whitelistAddress,
+const createNftWhiteList = (nftWhitelist: INftWhitelist | undefined) => ({
+  nftWhitelist: nftWhitelist,
 });
 
 function useNftWhiteList() {
   const wallet = useSolanaWallet();
-  const [whitelistAddress, setWhitelistAddress] = useState<INftWhiteList>();
+  const [nftWhitelist, setNftWhitelist] = useState<INftWhitelist>();
+  useState<INftWhitelist>();
 
   const fetchWhitelistAddressData = useCallback(async () => {
     if (wallet.publicKey) {
@@ -18,7 +19,7 @@ function useNftWhiteList() {
         }/api/airdrop_whitelist?id=${wallet.publicKey?.toBase58()}`,
       );
       const jsonData = await responseData.json();
-      setWhitelistAddress(jsonData.data[0]);
+      setNftWhitelist(jsonData.data[0]);
     }
   }, [wallet.publicKey]);
 
@@ -29,7 +30,7 @@ function useNftWhiteList() {
     fetchWhitelistAddressData().then();
   }, [fetchWhitelistAddressData, wallet.publicKey]);
 
-  return createNftWhiteList(whitelistAddress);
+  return createNftWhiteList(nftWhitelist);
 }
 
 export default useNftWhiteList;
