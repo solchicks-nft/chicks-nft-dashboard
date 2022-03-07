@@ -17,7 +17,7 @@ export default function Index() {
           <div className="mb-4 mt-4 text-xl text-gray-700 dark:bg-gray-700 dark:text-gray-300 font-proximanovaregular">
             <p className="font-medium">
               Enter our whitelist raffle for your chance to win one of our
-              limited edition 3D NFT eggs.
+              limited edition NFTs.
             </p>
           </div>
           <div className="pt-6 w-full flex justify-center">
