@@ -59,7 +59,7 @@ export default function Exchange() {
                   </h1>
                   <div className="mb-4 mt-4 text-xl text-gray-700 dark:bg-gray-700 dark:text-gray-300 font-proximanovaregular">
                     <span className="font-medium">
-                      Please select an NFT to swap for an exclusive 3D NFT.
+                      Please select an NFT to swap for a limited edition NFT.
                     </span>
                   </div>
                   {nfts && (

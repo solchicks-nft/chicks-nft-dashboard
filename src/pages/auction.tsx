@@ -50,7 +50,7 @@ export default function Auction() {
                   </h1>
                   <div className="mb-4 mt-4 text-xl text-gray-700 dark:bg-gray-700 dark:text-gray-300 font-proximanovaregular">
                     <p className="font-medium">
-                      Bid $CHICKS to win one of our limited edition 3D NFT eggs.
+                      Bid $CHICKS to win one of our limited edition NFTs.
                     </p>
                   </div>
                   <div className="pt-6 w-full flex">
