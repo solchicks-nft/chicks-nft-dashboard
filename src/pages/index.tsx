@@ -32,8 +32,8 @@ export default function Index() {
               <p className="font-icielstabile text-xl">
                 As they were searching through the dark forest, at a far
                 distance, they saw a powerful light illuminating its
-                surrounding. It was the most vibrant light they had ever seen on
-                the planet, and it drew them to its direction.
+                surroundings. It was the most vibrant light they had ever seen
+                on the planet, and it drew them to its direction.
               </p>
               <br />
               <p className="font-icielstabile text-xl">
@@ -48,8 +48,11 @@ export default function Index() {
               <br />
               <p className="font-icielstabile text-xl pb-8">
                 They pondered for a while, then remembered an ancient legend
-                that Elder SolChick once told them, the legend that said only
-                the chosen one would get his hands on the Mystery Egg.
+                that Elder SolChick once told them, the legend that the faeries
+                of the ancient World Tree will drop $CHICKS tokens to the
+                travelers when they are asleep, which will let those travelers
+                lay their hands on the Mystery Egg... then the Mystery Egg will
+                choose the lucky one to own it!
               </p>
               <div className="pt-8 w-full flex justify-center">
                 <img
@@ -59,10 +62,12 @@ export default function Index() {
                 />
               </div>
               <div>
-                <div className="pt-10 w-full flex justify-center font-icielstabile text-2xl font-medium">
-                  Congratulations, your address is eligible for our whitelist
-                  raffle!
-                </div>
+                {nftWhitelist && (
+                  <div className="pt-10 w-full flex justify-center font-icielstabile text-2xl font-medium">
+                    Congratulations, your address is eligible for our whitelist
+                    raffle!
+                  </div>
+                )}
                 <div className="pt-9 w-full flex justify-center">
                   <button
                     className="items-center justify-center px-6 py-3 border border-transparent
