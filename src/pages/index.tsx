@@ -5,7 +5,7 @@ import Layout from '@/components/Layout';
 
 export default function Index() {
   const { nftWhitelist } = useNftWhiteList();
-  const GLEAM_WHITELIST_URL = `https://gleam.io/eOSJj/100k-airdrop-campaign-to-win-3d-nft-egg`;
+  const GLEAM_WHITELIST_URL = `https://gleam.io/eOSJj/100k-airdrop-campaign-to-win-mystery-egg`;
 
   return (
     <div>
@@ -46,7 +46,7 @@ export default function Index() {
             <p className="font-medium">
               Then they remembered an ancient legend the Elders always liked
               telling, saying that only a lucky person could get his hands on
-              the Mystery Egg.. yes but who is this person?
+              the Mystery Egg... yes but who is this person?
             </p>
           </div>
           <div className="pt-6 w-full flex justify-center">
