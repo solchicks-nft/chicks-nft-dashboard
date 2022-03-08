@@ -44,10 +44,12 @@ export default function Help() {
                           For two week windows in March, the SolChicks village
                           wanted to expand their community by airdropping 1
                           $CHICKS token to 100,000 non $CHICKS holders. To check
-                          if you&#039;re eligible, first check for 1 $CHICKS
-                          token in your wallet, connect your wallet to
-                          nft.solchicks.io and then browse to the{` `}
-                          <strong>Claim</strong> page.
+                          if you&#039;re eligible, first check if you got
+                          airdropped 1 $CHICKS token in your wallet. If so,
+                          connect your wallet to nft.solchicks.io and then
+                          browse to the{` `}
+                          <strong>Claim</strong> page. If you haven&#039;t been
+                          airdropped, try your luck - you never know!
                         </p>
                       </div>
                     </div>
