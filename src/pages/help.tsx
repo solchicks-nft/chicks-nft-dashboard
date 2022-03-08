@@ -41,10 +41,11 @@ export default function Help() {
                         </p>
                         <br />
                         <p className="font-proximanovaregular text-base">
-                          For a two week window in March, we will be airdropping
-                          1 $CHICKS token to 100,000 non-$CHICKS holders. To
-                          check if you&#039;re eligible, first check for 1
-                          $CHICKS token in your wallet, connect your wallet to
+                          For two week windows in March, the SolChicks village
+                          wanted to expand their community by airdropping 1
+                          $CHICKS token to 100,000 non $CHICKS holders. To check
+                          if you&#039;re eligible, first check for 1 $CHICKS
+                          token in your wallet, connect your wallet to
                           nft.solchicks.io and then browse to the{` `}
                           <strong>Claim</strong> page.
                         </p>
