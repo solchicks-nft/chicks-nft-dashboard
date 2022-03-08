@@ -20,35 +20,36 @@ export default function Index() {
               <p className="font-icielstabile">
                 <span className="lore-caps font-proximanovabold">I</span>
                 <span className="text-xl">
-                  t was a hot and dry day on Planet Mellow, water was scarce in
-                  this place they now called home and the heat was taking its
-                  toll on the village. One night, two brothers were on their way
-                  back home but a powerful light caught their attention. It was
-                  the most vibrant light they’d ever seen and it drew them in
-                  its direction similar to how mermaids have a magnetic pull on
-                  sailors.
+                  t was a hot and dry night on Planet Mellow, where the
+                  remaining SolChicks landed after escaping from their home
+                  Planet Chicco which was destroyed by DarkFangs. Water was
+                  scarce on the planet and the heat was taking its toll on them,
+                  but the SolChicks troop had to continue their journey to find
+                  fertile land to build their new base.
                 </span>
               </p>
               <br />
               <p className="font-icielstabile text-xl">
-                As they got closer to the light the intensity grew stronger and
-                stronger to the point where they could barely see. After a while
-                their eyes adapted, they started to see a shape and realized
-                that before them there was a mysterious egg. Why was it
-                irradiating such a powerful light and what was in it?
+                As they were searching through the dark forest, at a far
+                distance, they saw a powerful light illuminating its
+                surrounding. It was the most vibrant light they had ever seen on
+                the planet, and it drew them to its direction.
               </p>
               <br />
               <p className="font-icielstabile text-xl">
-                They pondered this for a while. They remembered an ancient
-                legend the Elders always liked telling, saying that only one
-                lucky person could get his hands on the Mystery Egg…who will
-                this lucky person be?
+                It was difficult to see clearly at first as the light was so
+                powerful, but slowly they started to recognize the shape and
+                realized that there was a mysterious egg in front of them.
+              </p>
+              <br />
+              <p className="font-icielstabile text-xl">
+                Why is it irradiating such a powerful light? What is in it?
               </p>
               <br />
               <p className="font-icielstabile text-xl pb-8">
-                Then they remembered an ancient legend the Elders always liked
-                telling, saying that only a lucky person could get his hands on
-                the Mystery Egg... yes but who is this person?
+                They pondered for a while, then remembered an ancient legend
+                that Elder SolChick once told them, the legend that said only
+                the chosen one would get his hands on the Mystery Egg.
               </p>
               <div className="pt-8 w-full flex justify-center">
                 <img
