@@ -42,7 +42,7 @@ export default function Help() {
                         <br />
                         <p className="font-proximanovaregular text-base">
                           For a two week window in March, we will be airdropping
-                          1 $CHICKS token to 75,000 non-$CHICKS holders. To
+                          1 $CHICKS token to 100,000 non-$CHICKS holders. To
                           check if you&#039;re eligible, first check for 1
                           $CHICKS token in your wallet, connect your wallet to
                           nft.solchicks.io and then browse to the{` `}
