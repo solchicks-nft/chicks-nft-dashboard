@@ -29,7 +29,7 @@ export default function Index() {
             </p>
             <br />
             <p className="font-medium">
-              One night, two brothers were on their way back home but a powerful
+              One night, two brothers were on their way back home when a powerful
               light caught their attention. It was the most vibrant light they’d
               ever seen and it drew them in its direction similar to how
               mermaids have a magnetic pull on sailors.
