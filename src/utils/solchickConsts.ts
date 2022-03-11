@@ -1,5 +1,5 @@
-export const SOLCHICK_NFT_PROGRAM_ID = process.env
-  .REACT_APP_SOLCHICK_NFT_PROGRAM_ID as string;
+export const SOLCHICK_NFT_EXCHANGE_PROGRAM_ID = process.env
+  .NEXT_PUBLIC_SOLCHICK_NFT_EXCHANGE_PROGRAM_ID as string;
 export const SOLCHICK_DECIMALS_ON_SOL = 9;
 export const NFT_EXCHANGE_PROGRAM_IDL = require(`@/idl/nft_exchange.json`);
 

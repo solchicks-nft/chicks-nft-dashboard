@@ -19,6 +19,16 @@ import React, {
 import { useSolanaWallet } from '@/contexts/SolanaWalletProvider';
 import { sleep } from '@/utils/helper';
 import SampleNfts from '@/assets/data/sample-nfts.json';
+import { ConfirmOptions, Connection } from '@solana/web3.js';
+import { SOLANA_HOST, toPublicKey } from '@/utils/solanaHelper';
+import { AnchorWallet } from '@solana/wallet-adapter-react';
+import {
+  Idl,
+  Program,
+  Provider as AnchorProvider,
+} from '@project-serum/anchor';
+import { NFT_EXCHANGE_PROGRAM_IDL } from '@/utils/solchickConsts';
+import ConsoleHelper from '@/utils/consoleHelper';
 
 interface INftExchange {
   nfts: INft[] | null | undefined;
@@ -95,6 +105,20 @@ export const NftExchangeProvider = ({
   const [nftIsProcessing, setNftIsProcessing] = useState<boolean>(false);
   const [nfts, setNfts] = useState<INft[]>();
   const wallet = useSolanaWallet();
+  const solanaConnection = useMemo(
+    () => new Connection(SOLANA_HOST, `confirmed`),
+    [],
+  );
+  const getAnchorProvider = useCallback(async () => {
+    const opts = {
+      preflightCommitment: `confirmed`,
+    };
+    return new AnchorProvider(
+      solanaConnection,
+      wallet as unknown as AnchorWallet,
+      opts.preflightCommitment as unknown as ConfirmOptions,
+    );
+  }, [solanaConnection, wallet]);
 
   const fetchNftData = useCallback(async () => {
     if (wallet.publicKey) {
@@ -113,24 +137,48 @@ export const NftExchangeProvider = ({
   }, [wallet.publicKey]);
 
   const exchange2dNftForEgg = useCallback(async () => {
-    if (wallet.publicKey) {
+    if (!solanaConnection) {
+      return;
+    }
+
+    const provider = await getAnchorProvider();
+    const programIdl = NFT_EXCHANGE_PROGRAM_IDL;
+    if (!provider) {
+      return;
+    }
+
+    const program = new Program(
+      programIdl as unknown as Idl,
+      toPublicKey(programIdl.metadata.address),
+      provider,
+    );
+    ConsoleHelper(
+      `exchange2dNftForEgg -> program id: ${program.programId.toString()}`,
+    );
+
+    if (wallet) {
       setNftExchangeType(NftExchangeType.EGG);
       setNftStatusCode(NftStatusCode.NONE);
       setNftIsProcessing(true);
+
       setNftStatusCode(NftStatusCode.START);
       await sleep(2000);
+
       setNftStatusCode(NftStatusCode.CHECKING);
       await sleep(2000);
+
       setNftStatusCode(NftStatusCode.TRANSFERRING);
       await sleep(2000);
+
       setNftStatusCode(NftStatusCode.PREPARING);
       fetchNftData().then(async () => {
         await sleep(2000);
         setNftStatusCode(NftStatusCode.SUCCESS);
         setNftIsProcessing(false);
+        setNftExchangeType(NftExchangeType.NONE);
       });
     }
-  }, [fetchNftData, wallet.publicKey]);
+  }, [fetchNftData, getAnchorProvider, solanaConnection, wallet]);
 
   useEffect(() => {
     if (!wallet.publicKey) {
