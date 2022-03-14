@@ -18,9 +18,16 @@ import React, {
 } from 'react';
 import { useSolanaWallet } from '@/contexts/SolanaWalletProvider';
 import { sleep } from '@/utils/helper';
+import anchor from '@project-serum/anchor';
+import { TOKEN_PROGRAM_ID } from '@solana/spl-token';
 import SampleNfts from '@/assets/data/sample-nfts.json';
-import { ConfirmOptions, Connection } from '@solana/web3.js';
-import { SOLANA_HOST, toPublicKey } from '@/utils/solanaHelper';
+import { ConfirmOptions, Connection, PublicKey } from '@solana/web3.js';
+import {
+  getAssociatedTokenAddress,
+  hasNft,
+  SOLANA_HOST,
+  toPublicKey,
+} from '@/utils/solanaHelper';
 import { AnchorWallet } from '@solana/wallet-adapter-react';
 import {
   Idl,
@@ -29,7 +36,6 @@ import {
 } from '@project-serum/anchor';
 import { NFT_EXCHANGE_PROGRAM_IDL } from '@/utils/solchickConsts';
 import ConsoleHelper from '@/utils/consoleHelper';
-import * as anchor from '@project-serum/anchor';
 
 interface INftExchange {
   nfts: INft[] | null | undefined;
@@ -137,56 +143,90 @@ export const NftExchangeProvider = ({
     }
   }, [wallet.publicKey]);
 
-  const exchange2dNftForEgg = useCallback(async () => {
-    if (!solanaConnection) {
-      return;
-    }
+  const exchange2dNftForEgg = useCallback(
+    async (nftAddress: string | PublicKey) => {
+      if (!solanaConnection || !wallet || !wallet.publicKey) {
+        return;
+      }
 
-    const provider = await getAnchorProvider();
-    const programIdl = NFT_EXCHANGE_PROGRAM_IDL;
-    if (!provider) {
-      return;
-    }
+      const provider = await getAnchorProvider();
+      const programIdl = NFT_EXCHANGE_PROGRAM_IDL;
+      if (!provider) {
+        return;
+      }
 
-    const program = new Program(
-      programIdl as unknown as Idl,
-      toPublicKey(programIdl.metadata.address),
-      provider,
-    );
-    ConsoleHelper(
-      `exchange2dNftForEgg -> program id: ${program.programId.toString()}`,
-    );
+      const program = new Program(
+        programIdl as unknown as Idl,
+        toPublicKey(programIdl.metadata.address),
+        provider,
+      );
+      ConsoleHelper(
+        `exchange2dNftForEgg -> program id: ${program.programId.toString()}`,
+      );
+      const EXCHANGE_PDA_SEED = `exchange`;
+      const LOCKED_PDA_SEED = `locked`;
 
-    const [exchangePubkey, exchangeBump] =
-      await anchor.web3.PublicKey.findProgramAddress(
-        [
-          provider.wallet.publicKey.toBuffer(),
-          // tokenAccount.toBuffer(),
-          Buffer.from(anchor.utils.bytes.utf8.encode(`exchange`)),
-        ],
-        program.programId,
+      const [exchangePubkey, exchangeBump] =
+        await anchor.web3.PublicKey.findProgramAddress(
+          [
+            provider.wallet.publicKey.toBuffer(),
+            // tokenAccount.toBuffer(),
+            Buffer.from(anchor.utils.bytes.utf8.encode(EXCHANGE_PDA_SEED)),
+          ],
+          program.programId,
+        );
+
+      const [lockedNftAccountPubkey, lockedNftAccountNonce] =
+        await anchor.web3.PublicKey.findProgramAddress(
+          [
+            toPublicKey(nftAddress).toBuffer(),
+            Buffer.from(anchor.utils.bytes.utf8.encode(LOCKED_PDA_SEED)),
+          ],
+          program.programId,
+        );
+
+      const nftAccount = await getAssociatedTokenAddress(
+        nftAddress,
+        wallet.publicKey,
       );
 
-    if (wallet) {
+      const [configKey, configNonce] = await PublicKey.findProgramAddress(
+        [Buffer.from(EXCHANGE_PDA_SEED)],
+        program.programId,
+      );
+      ConsoleHelper(`nftAccount`, nftAccount.toString());
+      ConsoleHelper(`nftAddress`, nftAddress.toString());
+      ConsoleHelper(`exchangePubkey`, exchangePubkey.toString());
+      ConsoleHelper(`configKey`, configKey.toString());
+      ConsoleHelper(
+        `lockedNftAccountPubkey`,
+        lockedNftAccountPubkey.toString(),
+      );
+
       setNftExchangeType(NftExchangeType.EGG);
       setNftStatusCode(NftStatusCode.NONE);
       setNftIsProcessing(true);
 
       setNftStatusCode(NftStatusCode.START);
-      await sleep(2000);
 
       setNftStatusCode(NftStatusCode.CHECKING);
-      await sleep(2000);
-
+      if (await hasNft(solanaConnection, wallet.publicKey, nftAddress)) {
+        ConsoleHelper(
+          `exchange2dNftForEgg -> None!!!: nftAddress: ${nftAddress.toString()}`,
+        );
+        return;
+      }
 
       setNftStatusCode(NftStatusCode.TRANSFERRING);
-      await sleep(2000);
-      await program.rpc.lock(exchangeBump, {
+      await program.rpc.lock(configNonce, exchangeBump, lockedNftAccountNonce, {
         accounts: {
-          payer: provider.wallet.publicKey,
-          nftAccount: tokenAccount,
-          nftMint: mintPubkey,
+          signer: provider.wallet.publicKey,
+          nftAccount: toPublicKey(nftAccount),
+          nftMint: toPublicKey(nftAddress),
           exchangeAccount: exchangePubkey,
+          configuration: configKey,
+          lockedNftTokenAccount: lockedNftAccountPubkey,
+          tokenProgram: TOKEN_PROGRAM_ID,
           systemProgram: anchor.web3.SystemProgram.programId,
           rent: anchor.web3.SYSVAR_RENT_PUBKEY,
         },
@@ -199,8 +239,9 @@ export const NftExchangeProvider = ({
         setNftIsProcessing(false);
         setNftExchangeType(NftExchangeType.NONE);
       });
-    }
-  }, [fetchNftData, getAnchorProvider, solanaConnection, wallet]);
+    },
+    [fetchNftData, getAnchorProvider, solanaConnection, wallet],
+  );
 
   useEffect(() => {
     if (!wallet.publicKey) {

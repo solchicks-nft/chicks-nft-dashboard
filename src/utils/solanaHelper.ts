@@ -1,4 +1,4 @@
-import { clusterApiUrl, Connection, PublicKey, Signer } from '@solana/web3.js';
+import {clusterApiUrl, Connection, ParsedAccountData, PublicKey, Signer} from '@solana/web3.js';
 import {
   ASSOCIATED_TOKEN_PROGRAM_ID,
   Token,
@@ -7,6 +7,7 @@ import {
 import * as anchor from '@project-serum/anchor';
 import ConsoleHelper from './consoleHelper';
 import { sleep } from './helper';
+import BN from "bn.js";
 
 const PubKeysInternedMap = new Map<string, PublicKey>();
 
@@ -100,4 +101,33 @@ export const getTransactionInfoOnSol = async (
     }
   }
   return txInfo;
+};
+
+export const hasNft = async (
+  solanaConnection: Connection,
+  walletAccount: string | PublicKey,
+  nftAddress: string | PublicKey,
+) => {
+  if (!solanaConnection) {
+    return false;
+  }
+
+  const associatedKey = await getAssociatedTokenAddress(
+    toPublicKey(nftAddress),
+    toPublicKey(walletAccount),
+  );
+  ConsoleHelper(
+    `isEnoughNft -> associatedKey: ${pubkeyToString(associatedKey)}`,
+  );
+
+  try {
+    const nftAmount = await getTokenBalance(solanaConnection, associatedKey);
+    if (nftAmount.eq(new BN(1))) {
+      return true;
+    }
+  } catch (e) {
+    ConsoleHelper(`isEnoughNftOnSolana: ${e}`);
+  }
+
+  return false;
 };
