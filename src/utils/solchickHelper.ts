@@ -1,9 +1,15 @@
-import { clusterApiUrl, PublicKey } from '@solana/web3.js';
 import { formatUnits } from '@ethersproject/units';
 import * as anchor from '@project-serum/anchor';
-import { CHAIN_ID_SOLANA, ChainId } from '../lib/consts';
-import { isEVMChain } from '../lib/array';
+import { CHAIN_ID_SOLANA, ChainId } from '@/lib/consts';
+import { isEVMChain } from '@/lib/array';
 import { SOLCHICK_DECIMALS_ON_SOL } from './solchickConsts';
+import ConsoleHelper from './consoleHelper';
+import { Connection, ParsedAccountData } from '@solana/web3.js';
+import {
+  getAssociatedTokenAddress,
+  pubkeyToString,
+} from '@/utils/solanaHelper';
+import BN from 'bn.js';
 
 export const toBalanceString = (
   balance: bigint | undefined,
@@ -38,4 +44,48 @@ export const toTokenBalanceString = (
     return formatUnits(value, SOLCHICK_DECIMALS_ON_SOL);
   }
   return ``;
+};
+
+export const isEnoughNftOnSolana = async (
+  solanaConnection: Connection,
+  nftAddress: string,
+  amount: string,
+) => {
+  if (!solanaConnection) {
+    return false;
+  }
+  const bnNftAmount = new BN(amount);
+  const associatedKey = await getAssociatedTokenAddress(
+    //SOLCHICK_TOKEN_MINT_ON_SOL,
+    nftAddress,
+  );
+  ConsoleHelper(
+    `isEnoughNftOnSolana -> associatedKey: ${pubkeyToString(associatedKey)}`,
+  );
+  let nftAmount: BN = new BN(0);
+  try {
+    const parsedAccount = await solanaConnection.getParsedAccountInfo(
+      associatedKey,
+    );
+    if (parsedAccount.value) {
+      nftAmount = new BN(
+        (
+          parsedAccount.value.data as ParsedAccountData
+        ).parsed.info.tokenAmount.amount,
+      );
+      ConsoleHelper(`isEnoughNftOnSolana -> parsedAccount`, parsedAccount);
+      ConsoleHelper(
+        `isEnoughNftOnSolana -> nftAmount`,
+        nftAmount.toString(),
+      );
+    }
+  } catch (e) {
+    ConsoleHelper(`isEnoughNftOnSolana: ${e}`);
+  }
+
+  if (nftAmount.cmp(bnNftAmount) >= 0) {
+  } else {
+    return false;
+  }
+  return true;
 };

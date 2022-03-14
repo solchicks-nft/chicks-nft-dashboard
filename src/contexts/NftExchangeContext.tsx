@@ -178,6 +178,7 @@ export const NftExchangeProvider = ({
       setNftStatusCode(NftStatusCode.CHECKING);
       await sleep(2000);
 
+
       setNftStatusCode(NftStatusCode.TRANSFERRING);
       await sleep(2000);
       await program.rpc.lock(exchangeBump, {
