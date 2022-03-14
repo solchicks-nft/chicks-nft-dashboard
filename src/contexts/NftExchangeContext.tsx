@@ -53,7 +53,7 @@ interface INftExchange {
   nftErrorCode: NftErrorCode;
   nftExchangeType: NftExchangeType;
   nftIsProcessing: boolean;
-  exchange2dNftForEgg(): void;
+  exchange2dNftForEgg(nftAddress: string | PublicKey): void;
   setNftStatusCode(nftStatusCode: NftStatusCode): void;
   fetchNftData(): void;
 }
