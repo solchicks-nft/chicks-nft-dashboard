@@ -1,4 +1,4 @@
-import {clusterApiUrl, Connection, ParsedAccountData, PublicKey, Signer} from '@solana/web3.js';
+import { clusterApiUrl, Connection, PublicKey, Signer } from '@solana/web3.js';
 import {
   ASSOCIATED_TOKEN_PROGRAM_ID,
   Token,
@@ -7,16 +7,16 @@ import {
 import * as anchor from '@project-serum/anchor';
 import ConsoleHelper from './consoleHelper';
 import { sleep } from './helper';
-import BN from "bn.js";
+import BN from 'bn.js';
 
 const PubKeysInternedMap = new Map<string, PublicKey>();
 
 export type Cluster = 'devnet' | 'testnet' | 'mainnet';
 export const CLUSTER: Cluster =
   // eslint-disable-next-line no-nested-ternary
-  process.env.REACT_APP_CLUSTER === `mainnet`
+  process.env.NEXT_PUBLIC_CLUSTER === `mainnet`
     ? `mainnet`
-    : process.env.REACT_APP_CLUSTER === `testnet`
+    : process.env.NEXT_PUBLIC_CLUSTER === `testnet`
     ? `testnet`
     : `devnet`;
 

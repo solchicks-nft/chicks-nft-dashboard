@@ -22,6 +22,7 @@ export const EggUpgradeConfirmModal = ({
     setSelectedNft,
     exchange2dNftForEgg,
     nftIsProcessing,
+    setNftIsProcessing,
     nftStatusCode,
     setNftStatusCode,
   } = useNftExchange();
@@ -32,8 +33,16 @@ export const EggUpgradeConfirmModal = ({
         as="div"
         className="fixed inset-0 z-10 overflow-y-auto"
         onClose={() => {
-          setSelectedNft(null);
-          setIsOpen(false);
+          if (
+            !nftIsProcessing ||
+            nftStatusCode == NftStatusCode.SUCCESS ||
+            nftStatusCode == NftStatusCode.FAILED
+          ) {
+            setSelectedNft(null);
+            setIsOpen(false);
+            setNftStatusCode(NftStatusCode.NONE);
+            setNftIsProcessing(false);
+          }
         }}
       >
         <div className="min-h-screen px-4 text-center">
@@ -74,12 +83,14 @@ export const EggUpgradeConfirmModal = ({
                 {selectedNft && nftIsProcessing && (
                   <div>
                     <div className="py-6 w-full flex items-center justify-center">
-                      <Oval
-                        color="#5850EC"
-                        secondaryColor="#FFFFF"
-                        height={80}
-                        width={80}
-                      />
+                      <div>
+                        <Oval
+                          color="#5850EC"
+                          secondaryColor="#FFFFF"
+                          height={80}
+                          width={80}
+                        />
+                      </div>
                     </div>
                     <NftStatusMessage nftStatusCode={nftStatusCode} />
                   </div>
@@ -119,14 +130,14 @@ export const EggUpgradeConfirmModal = ({
                 {!selectedNft ||
                   (selectedNft && nftStatusCode === NftStatusCode.FAILED && (
                     <div>
-                      <p className="text-xl text-gray-500 font-proximanovaregular mt-2">
+                      <p className="text-xl text-gray-500 font-proximanovaregular mt-2 text-center">
                         An error has occurred, please try again.
                       </p>
                     </div>
                   ))}
                 {!selectedNft && (
                   <div>
-                    <p className="text-xl text-gray-500 font-proximanovaregular mt-2">
+                    <p className="text-xl text-gray-500 font-proximanovaregular mt-2 text-center">
                       An error has occurred, please try again.
                     </p>
                   </div>
