@@ -29,6 +29,7 @@ import {
 } from '@project-serum/anchor';
 import { NFT_EXCHANGE_PROGRAM_IDL } from '@/utils/solchickConsts';
 import ConsoleHelper from '@/utils/consoleHelper';
+import * as anchor from '@project-serum/anchor';
 
 interface INftExchange {
   nfts: INft[] | null | undefined;
@@ -156,6 +157,16 @@ export const NftExchangeProvider = ({
       `exchange2dNftForEgg -> program id: ${program.programId.toString()}`,
     );
 
+    const [exchangePubkey, exchangeBump] =
+      await anchor.web3.PublicKey.findProgramAddress(
+        [
+          provider.wallet.publicKey.toBuffer(),
+          // tokenAccount.toBuffer(),
+          Buffer.from(anchor.utils.bytes.utf8.encode(`exchange`)),
+        ],
+        program.programId,
+      );
+
     if (wallet) {
       setNftExchangeType(NftExchangeType.EGG);
       setNftStatusCode(NftStatusCode.NONE);
@@ -169,6 +180,16 @@ export const NftExchangeProvider = ({
 
       setNftStatusCode(NftStatusCode.TRANSFERRING);
       await sleep(2000);
+      await program.rpc.lock(exchangeBump, {
+        accounts: {
+          payer: provider.wallet.publicKey,
+          nftAccount: tokenAccount,
+          nftMint: mintPubkey,
+          exchangeAccount: exchangePubkey,
+          systemProgram: anchor.web3.SystemProgram.programId,
+          rent: anchor.web3.SYSVAR_RENT_PUBKEY,
+        },
+      });
 
       setNftStatusCode(NftStatusCode.PREPARING);
       fetchNftData().then(async () => {
