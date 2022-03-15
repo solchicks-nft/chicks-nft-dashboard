@@ -206,8 +206,11 @@ export const NftExchangeProvider = ({
       [Buffer.from(EXCHANGE_PDA_SEED)],
       program.programId,
     );
+    const selectedNftAddress = toPublicKey(
+      selectedNft?.hash as unknown as string | PublicKey,
+    );
     ConsoleHelper(`nftAccount`, nftAccount.toString());
-    ConsoleHelper(`nftAddress`, selectedNft.data.metadata.mint);
+    ConsoleHelper(`nftAddress`, selectedNftAddress.toString());
     ConsoleHelper(`exchangePubkey`, exchangePubkey.toString());
     ConsoleHelper(`configKey`, configKey.toString());
     ConsoleHelper(`lockedNftAccountPubkey`, lockedNftAccountPubkey.toString());
@@ -219,9 +222,11 @@ export const NftExchangeProvider = ({
     setNftStatusCode(NftStatusCode.START);
     setNftStatusCode(NftStatusCode.CHECKING);
     await sleep(2000);
-    if (!(await hasNft(solanaConnection, wallet.publicKey, selectedNft.hash))) {
+    if (
+      !(await hasNft(solanaConnection, wallet.publicKey, selectedNftAddress))
+    ) {
       ConsoleHelper(
-        `exchange2dNftForEgg -> nft not located at address: ${selectedNft.hash.toString()}`,
+        `exchange2dNftForEgg -> nft not located at address: ${selectedNftAddress.toString()}`,
       );
       setNftStatusCode(NftStatusCode.FAILED);
       setNftErrorCode(NftErrorCode.NFT_AMOUNT_NOT_ENOUGH);
@@ -234,7 +239,7 @@ export const NftExchangeProvider = ({
         accounts: {
           signer: provider.wallet.publicKey,
           nftAccount: toPublicKey(nftAccount),
-          nftMint: toPublicKey(selectedNft.data.metadata.mint),
+          nftMint: selectedNftAddress,
           exchangeAccount: exchangePubkey,
           configuration: configKey,
           lockedNftTokenAccount: lockedNftAccountPubkey,
@@ -246,7 +251,7 @@ export const NftExchangeProvider = ({
 
       setNftStatusCode(NftStatusCode.PREPARING);
       axios
-        .get(URL_SUBMIT_EGG_UPGRADE(selectedNft.hash))
+        .get(URL_SUBMIT_EGG_UPGRADE(selectedNftAddress.toString()))
         .then(async (results) => {
           await sleep(2000);
           await program.rpc.unlock(
@@ -257,7 +262,7 @@ export const NftExchangeProvider = ({
               accounts: {
                 signer: provider.wallet.publicKey,
                 nftAccount: toPublicKey(nftAccount),
-                nftMint: toPublicKey(selectedNft.data.metadata.mint),
+                nftMint: selectedNftAddress,
                 exchangeAccount: exchangePubkey,
                 configuration: configKey,
                 lockedNftTokenAccount: lockedNftAccountPubkey,
