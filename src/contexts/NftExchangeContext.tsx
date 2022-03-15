@@ -263,6 +263,7 @@ export const NftExchangeProvider = ({
             {
               accounts: {
                 signer: provider.wallet.publicKey,
+                nftOwner: provider.wallet.publicKey,
                 nftAccount: toPublicKey(nftAccount),
                 nftMint: selectedNftAddress,
                 exchangeAccount: exchangePubkey,
