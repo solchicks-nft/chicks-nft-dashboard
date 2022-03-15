@@ -129,8 +129,8 @@ export const EggUpgradeConfirmModal = ({
                   )}
                 {!selectedNft ||
                   (selectedNft && nftStatusCode === NftStatusCode.FAILED && (
-                    <div>
-                      <p className="text-xl text-gray-500 font-proximanovaregular mt-2 text-center">
+                    <div className="py-6 w-full flex items-center">
+                      <p className="text-xl text-gray-500 font-proximanovaregular mt-2 text-left">
                         An error has occurred, please try again.
                       </p>
                     </div>
@@ -170,7 +170,8 @@ export const EggUpgradeConfirmModal = ({
                     </div>
                   )}
                 {(selectedNft && nftIsProcessing) ||
-                  (selectedNft && nftStatusCode === NftStatusCode.SUCCESS && (
+                  (selectedNft && nftStatusCode === NftStatusCode.SUCCESS) ||
+                  (selectedNft && nftStatusCode === NftStatusCode.FAILED && (
                     <div>
                       <button
                         type="button"

@@ -237,45 +237,44 @@ export const NftExchangeProvider = ({
 
     try {
       setNftStatusCode(NftStatusCode.TRANSFERRING);
-      await program.rpc.lock(configNonce, exchangeBump, lockedNftAccountNonce, {
-        accounts: {
-          signer: provider.wallet.publicKey,
-          nftAccount: toPublicKey(nftAccount),
-          nftMint: selectedNftAddress,
-          exchangeAccount: exchangePubkey,
-          configuration: configKey,
-          lockedNftTokenAccount: lockedNftAccountPubkey,
-          tokenProgram: TOKEN_PROGRAM_ID,
-          systemProgram: anchor.web3.SystemProgram.programId,
-          rent: anchor.web3.SYSVAR_RENT_PUBKEY,
-        },
-      });
+      // await program.rpc.lock(configNonce, exchangeBump, lockedNftAccountNonce, {
+      //   accounts: {
+      //     signer: provider.wallet.publicKey,
+      //     nftAccount: toPublicKey(nftAccount),
+      //     nftMint: selectedNftAddress,
+      //     exchangeAccount: exchangePubkey,
+      //     configuration: configKey,
+      //     lockedNftTokenAccount: lockedNftAccountPubkey,
+      //     tokenProgram: TOKEN_PROGRAM_ID,
+      //     systemProgram: anchor.web3.SystemProgram.programId,
+      //     rent: anchor.web3.SYSVAR_RENT_PUBKEY,
+      //   },
+      // });
 
       setNftStatusCode(NftStatusCode.PREPARING);
       axios
         .get(URL_SUBMIT_EGG_UPGRADE(selectedNftAddress.toString()))
         .then(async (results) => {
-          await sleep(2000);
-          await program.rpc.unlock(
-            configNonce,
-            exchangeBump,
-            lockedNftAccountNonce,
-            {
-              accounts: {
-                signer: provider.wallet.publicKey,
-                nftOwner: provider.wallet.publicKey,
-                nftAccount: toPublicKey(nftAccount),
-                nftMint: selectedNftAddress,
-                exchangeAccount: exchangePubkey,
-                configuration: configKey,
-                lockedNftTokenAccount: lockedNftAccountPubkey,
-                tokenProgram: TOKEN_PROGRAM_ID,
-                systemProgram: anchor.web3.SystemProgram.programId,
-                rent: anchor.web3.SYSVAR_RENT_PUBKEY,
-              },
-            },
-          );
-          if (results.data.success) {
+          // await program.rpc.unlock(
+          //   configNonce,
+          //   exchangeBump,
+          //   lockedNftAccountNonce,
+          //   {
+          //     accounts: {
+          //       signer: provider.wallet.publicKey,
+          //       nftOwner: provider.wallet.publicKey,
+          //       nftAccount: toPublicKey(nftAccount),
+          //       nftMint: selectedNftAddress,
+          //       exchangeAccount: exchangePubkey,
+          //       configuration: configKey,
+          //       lockedNftTokenAccount: lockedNftAccountPubkey,
+          //       tokenProgram: TOKEN_PROGRAM_ID,
+          //       systemProgram: anchor.web3.SystemProgram.programId,
+          //       rent: anchor.web3.SYSVAR_RENT_PUBKEY,
+          //     },
+          //   },
+          // );
+          if (results.data.success && results.data.tx_id) {
             fetchNftData().then(async () => {
               setNftStatusCode(NftStatusCode.SUCCESS);
             });
