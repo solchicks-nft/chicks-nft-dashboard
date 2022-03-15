@@ -26,7 +26,6 @@ import * as anchor from '@project-serum/anchor';
 import { useSolanaWallet } from '@/contexts/SolanaWalletProvider';
 import { sleep } from '@/utils/helper';
 import { TOKEN_PROGRAM_ID } from '@solana/spl-token';
-import SampleNfts from '@/assets/data/sample-nfts.json';
 import { ConfirmOptions, Connection, PublicKey } from '@solana/web3.js';
 import {
   getAssociatedTokenAddress,
@@ -135,19 +134,22 @@ export const NftExchangeProvider = ({
 
   const fetchNftData = useCallback(async () => {
     if (wallet.publicKey) {
-      if (process.env.NEXT_PUBLIC_ENVIRONMENT != `staging`) {
-        const responseData = await fetch(
-          `${
-            process.env.NEXT_PUBLIC_BACKEND_URL
-          }/api/wallet?id=${wallet.publicKey?.toBase58()}`,
-        );
-        const jsonData = await responseData.json();
-        setNfts(jsonData.data);
-      } else {
-        setNfts(SampleNfts as unknown as INft[]);
+      const responseData = await fetch(
+        `${
+          process.env.NEXT_PUBLIC_BACKEND_URL
+        }/api/wallet?id=${wallet.publicKey?.toBase58()}`,
+      );
+      const jsonData = await responseData.json();
+      const nftsInWallet = [];
+      for (let i = 0; i < jsonData.data.length; i++) {
+        const nftAddress = jsonData.data[i].hash;
+        if (await hasNft(solanaConnection, wallet.publicKey, nftAddress)) {
+          nftsInWallet.push(jsonData.data[i]);
+        }
       }
+      setNfts(nftsInWallet);
     }
-  }, [wallet.publicKey]);
+  }, [solanaConnection, wallet.publicKey]);
 
   const exchange2dNftForEgg = useCallback(async () => {
     if (
