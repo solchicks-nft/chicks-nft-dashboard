@@ -7,15 +7,16 @@ import {
 import * as anchor from '@project-serum/anchor';
 import ConsoleHelper from './consoleHelper';
 import { sleep } from './helper';
+import BN from 'bn.js';
 
 const PubKeysInternedMap = new Map<string, PublicKey>();
 
 export type Cluster = 'devnet' | 'testnet' | 'mainnet';
 export const CLUSTER: Cluster =
   // eslint-disable-next-line no-nested-ternary
-  process.env.REACT_APP_CLUSTER === `mainnet`
+  process.env.NEXT_PUBLIC_CLUSTER === `mainnet`
     ? `mainnet`
-    : process.env.REACT_APP_CLUSTER === `testnet`
+    : process.env.NEXT_PUBLIC_CLUSTER === `testnet`
     ? `testnet`
     : `devnet`;
 
@@ -100,4 +101,33 @@ export const getTransactionInfoOnSol = async (
     }
   }
   return txInfo;
+};
+
+export const hasNft = async (
+  solanaConnection: Connection,
+  walletAccount: string | PublicKey,
+  nftAddress: string | PublicKey,
+) => {
+  if (!solanaConnection) {
+    return false;
+  }
+
+  const associatedKey = await getAssociatedTokenAddress(
+    toPublicKey(nftAddress),
+    toPublicKey(walletAccount),
+  );
+  ConsoleHelper(
+    `isEnoughNft -> associatedKey: ${pubkeyToString(associatedKey)}`,
+  );
+
+  try {
+    const nftAmount = await getTokenBalance(solanaConnection, associatedKey);
+    if (nftAmount.eq(new BN(1))) {
+      return true;
+    }
+  } catch (e) {
+    ConsoleHelper(`isEnoughNftOnSolana: ${e}`);
+  }
+
+  return false;
 };

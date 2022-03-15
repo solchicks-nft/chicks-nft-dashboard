@@ -1,8 +1,7 @@
-import { clusterApiUrl, PublicKey } from '@solana/web3.js';
 import { formatUnits } from '@ethersproject/units';
 import * as anchor from '@project-serum/anchor';
-import { CHAIN_ID_SOLANA, ChainId } from '../lib/consts';
-import { isEVMChain } from '../lib/array';
+import { CHAIN_ID_SOLANA, ChainId } from '@/lib/consts';
+import { isEVMChain } from '@/lib/array';
 import { SOLCHICK_DECIMALS_ON_SOL } from './solchickConsts';
 
 export const toBalanceString = (

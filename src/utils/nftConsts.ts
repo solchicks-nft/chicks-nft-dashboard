@@ -100,7 +100,7 @@ export interface INft {
 }
 
 export enum NftStatusCode {
-  NONE = 0,
+  NONE,
   START,
   CHECKING,
   TRANSFERRING,
