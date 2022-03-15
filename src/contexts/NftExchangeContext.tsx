@@ -179,10 +179,14 @@ export const NftExchangeProvider = ({
     const EXCHANGE_PDA_SEED = `exchange`;
     const LOCKED_PDA_SEED = `locked`;
 
+    const selectedNftAddress = toPublicKey(
+      selectedNft?.hash as unknown as string | PublicKey,
+    );
+
     const [exchangePubkey, exchangeBump] =
       await anchor.web3.PublicKey.findProgramAddress(
         [
-          provider.wallet.publicKey.toBuffer(),
+          selectedNftAddress.toBuffer(),
           Buffer.from(anchor.utils.bytes.utf8.encode(EXCHANGE_PDA_SEED)),
         ],
         program.programId,
@@ -191,9 +195,7 @@ export const NftExchangeProvider = ({
     const [lockedNftAccountPubkey, lockedNftAccountNonce] =
       await anchor.web3.PublicKey.findProgramAddress(
         [
-          toPublicKey(
-            selectedNft?.hash as unknown as string | PublicKey,
-          ).toBuffer(),
+          selectedNftAddress.toBuffer(),
           Buffer.from(anchor.utils.bytes.utf8.encode(LOCKED_PDA_SEED)),
         ],
         program.programId,
@@ -208,9 +210,7 @@ export const NftExchangeProvider = ({
       [Buffer.from(EXCHANGE_PDA_SEED)],
       program.programId,
     );
-    const selectedNftAddress = toPublicKey(
-      selectedNft?.hash as unknown as string | PublicKey,
-    );
+
     ConsoleHelper(`nftAccount`, nftAccount.toString());
     ConsoleHelper(`nftAddress`, selectedNftAddress.toString());
     ConsoleHelper(`exchangePubkey`, exchangePubkey.toString());
